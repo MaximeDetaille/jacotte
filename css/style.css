@@ -37,10 +37,21 @@
     padding-top: 10px;
 }
 
+.divPicto{
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
 .titleHowWorks{
-    margin-bottom: 40px;
+    padding-bottom: 40px;
+    margin-top: 40px;
 }
 
 .picto{
     width: 80px;
+    margin:10px;
+}
+
+.textPicto{
+    color:#DEDCDE;
 }
