@@ -1,0 +1,46 @@
+.navbar-brand-centered {
+        position: absolute;
+        left: 50%;
+        display: block;
+        width: 200px;
+        text-align: center;
+        background-color: transparent;
+    }
+.navbar>.container .navbar-brand-centered, 
+.navbar>.container-fluid .navbar-brand-centered {
+    margin-left: -100px;
+}
+
+.navbar{
+    margin-bottom: 0px;
+}
+
+.jumb{
+    height: 680px;
+}
+
+.titleJumb{
+    font-size: 40px !important;
+    padding-left:20%;
+    padding-right: 20%;
+    margin-bottom: 60px;
+}
+
+.buttonJumb{
+    background-color: #A68D83;
+    color:white;
+    padding:15px 50px 15px 50px;
+    border-radius: 5px;
+}
+
+.howWork{
+    padding-top: 10px;
+}
+
+.titleHowWorks{
+    margin-bottom: 40px;
+}
+
+.picto{
+    width: 80px;
+}
