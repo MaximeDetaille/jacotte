@@ -1,15 +1,19 @@
-new Vue({
-	el:'#app',
+var x = new Vue({
+	el:'#menu',
 	data: {
-		message: "Salut les gens",
+		menu: this.$http.get('http://localhost/jacotte/request.php').then((reponse => {
+				console.log("success",reponse)
+			}, (reponse) =>{
+				console.log("error")
+			})),
+		cart: [],
 		link: "http://willemsefrance.fr",
 		success: true,
 		personnes: ["Max","Valentino","Jacotte","Tom"]
 	},
 	methods: {
-		close: function(){
-			this.success = false;
-			this.message = "LOLOLOL";
+		addToCart: function(){
+			
 		}
 	}
 })

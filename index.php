@@ -4,39 +4,28 @@
 	<meta charset="utf-8">
 	<title>La cuisine de Jacotte</title>
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="css/slick.css">
-	<link rel="stylesheet" type="text/css" href="css/slick-theme.css">
+	<link rel="stylesheet" type="text/css" href="css/owl.theme.default.css">
+	<link rel="stylesheet" type="text/css" href="css/owl.carousel.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
-	<style type="text/css">
-    html, body {
-      margin: 0;
-      padding: 0;
-    }
+	<?php 
+		try{
+			$menu = [];
+			$bdd = new PDO('mysql:host=localhost;dbname=jacotte;charset=utf8', 'root', '');
+			$query="SELECT * FROM menu";
+			$resultats=$bdd->query($query);
+			$resultats->setFetchMode(PDO::FETCH_OBJ);
+			while($resultat = $resultats->fetch()){
+				array_push($menu,$resultat);
+			}
+			$resultats->closeCursor();
+		}
 
-    * {
-      box-sizing: border-box;
-    }
-
-    .slider {
-        width: 50%;
-        margin: 100px auto;
-    }
-
-    .slick-slide {
-      margin: 0px 20px;
-    }
-
-    .slick-slide img {
-      width: 100%;
-    }
-
-    .slick-prev:before,
-    .slick-next:before {
-        color: black;
-    }
-  </style>
+		catch (Exception $e){
+			die('Erreur : ' . $e->getMessage());
+		}
+	?>
 	<nav class="navbar navbar-default" role="navigation">
 		<div class="container">
 		
@@ -92,46 +81,78 @@
 		</div>
 	</div>
 
-	<div class="menu">
+	<div id="menu" class="menu">
 		<div class="container">
 			<h1 class="text-center titleHowWorks">De nouveaux menu chaque semaine</h1>
 			<p class="text-center textPicto">Il vous reste 1h58 pour commander</p>
+			<div class="owl-carousel owl-theme">
+				<?php for($i=0;$i<sizeof($menu);$i++){
+					echo '
+					<div class="item">
+					<img class="imgCarousel" src="img/menu/'.$menu[$i]->image.'">
+					<div class="description">
+						<p class="type">'.$menu[$i]->type.'</p>
+						<p class="titreMenu">'.$menu[$i]->nom.'</p>
+						<p class="prix">'.$menu[$i]->prix.'€</p>
+					</div>
+					<div class="descriptionHover">
+						<p class="titreMenu">'.$menu[$i]->nom.'</p>
+						<p class="descriptionMenu">'.$menu[$i]->description.'</p>
+						<p class="allergenes">Allergènes : '.$menu[$i]->allergenes.'</p>
+						<div class="divButton">
+							<a class="buttonMenu">Dégustez le menu</a>
+						</div>
+					</div>
+				</div>
+				';
+				}
+				?>
+				<div class="owl-controls">
+				</div>
+			</div>
 		</div>
 	</div>
-	<div id="app">
-		<div v-if="success">
-			<p>Bravo !</p>
-			<input type="text" v-model="message">
-			<p @click="close">Fermer</p>
-		</div>
-		<p>{{message}}</p>
-	</div>
+	
 	<script type="text/javascript" src="js/jquery-3.2.0.min.js"></script>
-	<script type="text/javascript" src="js/slick.js"></script>
 	<script type="text/javascript" src="js/bootstrap.js"></script>
+	<script src="https://cdn.jsdelivr.net/vue.resource/1.2.1/vue-resource.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.2.6/vue.js"></script>
 	<script type="text/javascript" src="js/app.js"></script>
+	<script type="text/javascript" src="js/owl.carousel.js"></script>
 	<script type="text/javascript">
-    $(document).on('ready', function() {
-      $(".regular").slick({
-        dots: true,
-        infinite: true,
-        slidesToShow: 3,
-        slidesToScroll: 3
-      });
-      $(".center").slick({
-        dots: true,
-        infinite: true,
-        centerMode: true,
-        slidesToShow: 3,
-        slidesToScroll: 3
-      });
-      $(".variable").slick({
-        dots: true,
-        infinite: true,
-        variableWidth: true
-      });
-    });
-  </script>
+		$(document).ready(function(){
+		  $('.owl-carousel').owlCarousel({
+		  	nav:true,
+		  	items:2,
+		  	loop:false,
+		  	margin:20,
+		  	autoWidth:true,
+		  	responsive:{
+		  		400:{
+		  			items:2
+		  		},
+		  		768:{
+		  			items:2
+		  		},
+		  		992:{
+		  			items:3
+		  		},
+		  		1200:{
+		  			items:4
+		  		}
+		  	}
+		  });
+
+		  	$('.item').hover(function(){
+		  		$(this).children('.description').fadeOut(1,function(){
+		  			$(this).parent().children('.descriptionHover').fadeIn(400);
+		  		});
+		  	}, function(){
+		  		$(this).children('.descriptionHover').fadeOut(1,function(){
+		  			$(this).parent().children('.description').fadeIn(200);
+		  		});
+		  	});
+		});
+	</script>
 </body>
 </html>
