@@ -28,7 +28,6 @@
 	?>
 	<nav class="navbar navbar-default" role="navigation">
 		<div class="container">
-		
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-brand-centered">
 					<span class="sr-only">Toggle navigation</span>
@@ -100,7 +99,7 @@
 						<p class="descriptionMenu">'.$menu[$i]->description.'</p>
 						<p class="allergenes">Allergènes : '.$menu[$i]->allergenes.'</p>
 						<div class="divButton">
-							<a class="buttonMenu">Dégustez le menu</a>
+							<a v-on:click="addToCart('.$i.',`'.$menu[$i]->nom.'`,'.$menu[$i]->prix.')" class="buttonMenu">Dégustez le menu</a>
 						</div>
 					</div>
 				</div>
@@ -111,7 +110,14 @@
 				</div>
 			</div>
 		</div>
+		<div>
+			<ul>
+				<li>{{ cart }}</li>
+			</ul>
+		</div>
 	</div>
+
+	
 	
 	<script type="text/javascript" src="js/jquery-3.2.0.min.js"></script>
 	<script type="text/javascript" src="js/bootstrap.js"></script>
@@ -144,9 +150,7 @@
 		  });
 
 		  	$('.item').hover(function(){
-		  		$(this).children('.description').fadeOut(1,function(){
-		  			$(this).parent().children('.descriptionHover').fadeIn(400);
-		  		});
+		  		$(this).children('.descriptionHover').fadeIn(400);
 		  	}, function(){
 		  		$(this).children('.descriptionHover').fadeOut(1,function(){
 		  			$(this).parent().children('.description').fadeIn(200);

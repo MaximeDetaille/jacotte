@@ -1,5 +1,5 @@
 <?php
-
+	
 	$bdd = new PDO('mysql:host=localhost;dbname=jacotte;charset=utf8', 'root', '');
 
 	if ($_FILES['menuImage']['error'] > 0) $erreur = "Erreur lors du transfert";
@@ -11,21 +11,26 @@
 	$name = md5($_FILES['menuImage']['name']).$extension_upload;
 	move_uploaded_file($_FILES['menuImage']['tmp_name'],"C:\wamp\www\jacotte\img\menu\\".$name);
 
-	$menu="
+	$menu='
 	INSERT INTO 
 	menu(nom,description,prix,allergenes,type,image) 
 	VALUES(
-		'".$_POST['menuName']."',
-	    '".$_POST['menuDesc']."',
-	    '".$_POST['menuPrix']."',
-	    '".$_POST['menuAllergenes']."',
-		'".$_POST['menuType']."',
-		'".$name."')
-	";
+		"'.$_POST['menuName'].'",
+	    "'.$_POST['menuDesc'].'",
+	    "'.$_POST['menuPrix'].'",
+	    "'.$_POST['menuAllergenes'].'",
+		"'.$_POST['menuType'].'",
+		"'.$name.'")
+	';
+	var_dump($_SERVER);
+    if($bdd->exec($menu)){
+		echo "Votre menu à bien été ajouté";
+		$delai=3;
+		$url="http://".$_SERVER['HTTP_HOST']."/jacotte";
+		header("Refresh: $delai;url=$url");
+    }else{
+    	echo "Un problème est survenue";
+    }
 
-	echo ($menu);
-    $bdd->exec($menu);
-
-
-	var_dump($_POST);
+    
 ?>

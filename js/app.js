@@ -1,19 +1,29 @@
-var x = new Vue({
+let vm = new Vue({
 	el:'#menu',
 	data: {
-		menu: this.$http.get('http://localhost/jacotte/request.php').then((reponse => {
-				console.log("success",reponse)
-			}, (reponse) =>{
-				console.log("error")
-			})),
-		cart: [],
+		cart: [
+			{
+			'id':0,
+			'qte':0,
+			'nom':0,
+			'prix':0
+			}
+			],
 		link: "http://willemsefrance.fr",
-		success: true,
-		personnes: ["Max","Valentino","Jacotte","Tom"]
+		success: true
 	},
 	methods: {
-		addToCart: function(){
-			
+		addToCart: function(id,nom,prix){
+			if(this.cart[id]==undefined){
+				this.cart.push({'id':id,'qte':1,'nom':nom,'prix':prix});
+			}
+			else{
+				if(this.cart[id].id== id){
+				this.cart[id].nom= nom;
+				this.cart[id].prix= prix;
+				this.cart[id].qte = this.cart[id].qte+1;
+				}	
+			}
 		}
 	}
 })
