@@ -100,6 +100,27 @@ let vm = new Vue({
 			})
 			this.calcPrixTotal();
 		},
+		delItem: function(id){
+			last = this.last;
+			cart = this.cart;
+			this.cart.forEach(function(e,i){
+				if(e.id == id){
+					console.log(i);
+					cart.splice(i,1);
+					if(last[0].id==e.id){
+						if(cart.length==0){
+							$('.cart').fadeOut(function(){
+								last.pop();
+							});
+						}else{
+							last.pop();
+							last.push(cart[0]);
+						}
+					}
+				}
+			})
+			this.calcPrixTotal();
+		},
 		calcPrixTotal: function(){
 			var somme = 0;
 			this.cart.forEach(function(element){

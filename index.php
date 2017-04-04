@@ -12,7 +12,7 @@
 	<?php 
 		try{
 			$menu = [];
-			$bdd = new PDO('mysql:host=localhost;dbname=jacotte;charset=utf8', 'root', 'max59251');
+			$bdd = new PDO('mysql:host=localhost;dbname=jacotte;charset=utf8', 'root', '');
 			$query="SELECT * FROM menu";
 			$resultats=$bdd->query($query);
 			$resultats->setFetchMode(PDO::FETCH_OBJ);
@@ -113,18 +113,21 @@
 				</div>
 			</div>
 		</div>
+		{{cart}}
+		<br>
+		{{last}}
 		<div class="cart">
 			<div class="container">
 				<div class="row">
 					<div v-for="item in last"> 
-						<div class="col-lg-1">
+						<div class="col-lg-1 col-md-1 col-sm-1 col-xs-2">
 							<img class="imgCart" :src="'img/menu/'+item.image"/>
 						</div>
-						<div class="col-lg-2">
+						<div class="col-lg-2 col-md-2 col-sm-3 col-xs-5">
 							<p class="titreMenu">{{item.nom}}</p>
 							<p class="prixMenu">{{item.prix}}€</p>
 						</div>
-						<div class="col-lg-2">
+						<div class="col-lg-2 col-md-2 col-sm-2 col-xs-3">
 							<div class="cartQte">
 								<img class="chevron" @click="decrementQte(item.id)" src="img/chevronGauche.svg">
 								<div class="qteInput">
@@ -133,22 +136,22 @@
 								<img class="chevron" @click="incrementQte(item.id)" src="img/chevronDroit.svg">
 							</div>
 						</div>
-						<div class="col-lg-1">
-							<div class="cartDel">
+						<div class="col-lg-1 col-md-1 col-sm-1 col-xs-2">
+							<div class="cartDel" @click="delItem(item.id)">
 								<img class="imgCross" src="img/cross.svg">
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-3">
-						<p class="titreMenu">Votre commande :</p>
-						<p>{{prixTotal}}€</p>
+					<div class="col-lg-3 col-md-3 col-sm-2 col-xs-6">
+						<p class="titreMenu">Total :</p>
+						<p >{{prixTotal}}€</p>
 					</div>
-					<div class="col-lg-2">
+					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-4">
 						<div class="divButtonCart">
 							<a class="buttonMenu">Commander</a>
 						</div>
 					</div>
-					<div class="col-lg-1">
+					<div class="col-lg-1 col-md-1 col-sm-1 col-xs-2">
 						<div class="cartUp">
 							<img class="chevronUp" src="img/chevronUp.svg">
 						</div>
@@ -158,14 +161,14 @@
 					<div v-if="item.id==lastId">
 					</div>
 					<div v-else>
-						<div class="col-lg-1">
+						<div class="col-lg-1 col-md-1 col-sm-1 col-xs-2">
 							<img class="imgCart" :src="'img/menu/'+item.image"/>
 						</div>
-						<div class="col-lg-5">
+						<div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
 							<p class="titreMenu">{{item.nom}}</p>
 							<p class="prixMenu">{{item.prix}}€</p>
 						</div>
-						<div class="col-lg-3">
+						<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
 							<div class="cartQte">
 								<img @click="decrementQte(item.id)" class="chevron" src="img/chevronGauche.svg">
 								<div class="qteInput">
@@ -174,9 +177,9 @@
 								<img @click="incrementQte(item.id)" class="chevron" src="img/chevronDroit.svg">
 							</div>
 						</div>
-						<div class="col-lg-3">
-							<div class="cartDel">
-								<img @click="delItem(item.id)" class="imgCross" src="img/cross.svg">
+						<div class="col-lg-3 col-md-3 col-sm-3 col-xs-2">
+							<div class="cartDel" @click="delItem(item.id)">
+								<img class="imgCross" src="img/cross.svg">
 							</div>
 						</div>
 					</div>
