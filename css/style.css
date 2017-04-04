@@ -16,7 +16,9 @@
 }
 
 .jumb{
-    height: 680px;
+    height: 700px;
+    background-image: url('../img/background_jacotte.jpg');
+    background-size: cover;
 }
 
 .titleJumb{
@@ -49,6 +51,7 @@
 
 .picto{
     width: 80px;
+    height: 80px;
     margin:10px;
 }
 
@@ -154,9 +157,92 @@
     color:white;
     text-decoration: none;
 }
+
 /*button A58E7E*/
 
+/* CART */
 
+.cart{
+    display: none;
+    bottom:0px;
+    position: fixed;
+    width: 100%;
+    z-index: 10000;
+    padding-top: 10px;
+    box-shadow: 0px 0px 10px 1px rgba(0,0,0,0.5);
+    background-color: white;
+}
+
+.imgCart{
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px 1px rgba(0,0,0,0.5);
+}
+
+.divButtonCart{
+    background-color: #A68D83;
+    cursor: pointer;
+    border-radius: 5px;
+    height: 40px;
+    text-align: center;
+    padding-top: 10px;
+}
+
+.cartQte{
+    padding-top: 5px;
+}
+
+.cartDel{
+    padding-top: 10px;
+}
+
+.cartUp{
+    padding-top: 10px;
+    background-color: #EEECEE;
+    border-radius: 5px;
+    height: 40px;
+    text-align: center;
+    width: 40px;
+    cursor: pointer;
+}
+
+.chevron{
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+}
+
+.chevronUp{
+    width: 15px;
+    height: 15px;
+}
+
+.qteInput{
+    background-color: #EEECEE;
+    display: inline-block;
+    padding-top:5px;
+    padding-bottom:5px;
+    padding-left:8px;
+    padding-right:8px;
+}
+
+.qteInput input{
+    border: none;
+    display: inline-block;
+    width: 100%;
+    background-color: #EEECEE;
+}
+
+.imgCross{
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+}
+
+.showCart{
+    display: none;
+}
 
 /* ADMIN */
 

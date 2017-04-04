@@ -57,7 +57,7 @@
 		</div>
 	</div>
 
-	<div class="howWork">
+	<div id="work" class="howWork">
 		<div class="container">
 			<h1 class="text-center titleHowWorks">Comment ça marche ?</h1>
 			<div class="row text-center">
@@ -80,44 +80,110 @@
 		</div>
 	</div>
 
-	<div id="menu" class="menu">
-		<div class="container">
-			<h1 class="text-center titleHowWorks">De nouveaux menu chaque semaine</h1>
-			<p class="text-center textPicto">Il vous reste 1h58 pour commander</p>
-			<div class="owl-carousel owl-theme">
-				<?php for($i=0;$i<sizeof($menu);$i++){
-					echo '
-					<div class="item">
-					<img class="imgCarousel" src="img/menu/'.$menu[$i]->image.'">
-					<div class="description">
-						<p class="type">'.$menu[$i]->type.'</p>
-						<p class="titreMenu">'.$menu[$i]->nom.'</p>
-						<p class="prix">'.$menu[$i]->prix.'€</p>
-					</div>
-					<div class="descriptionHover">
-						<p class="titreMenu">'.$menu[$i]->nom.'</p>
-						<p class="descriptionMenu">'.$menu[$i]->description.'</p>
-						<p class="allergenes">Allergènes : '.$menu[$i]->allergenes.'</p>
-						<div class="divButton">
-							<a v-on:click="addToCart('.$i.',`'.$menu[$i]->nom.'`,'.$menu[$i]->prix.')" class="buttonMenu">Dégustez le menu</a>
+	<div id="menu">
+		<div class="menu"> 
+			<div class="container">
+				<h1 class="text-center titleHowWorks">De nouveaux menu chaque semaine</h1>
+				<p v-if="seconds > 0" class="text-center textPicto">Il vous reste {{heures}}h {{ minutes}}m {{secondes}}s pour commander</p>
+				<p v-else class="text-center textPicto">Commandez pour demain</p>
+				<div class="owl-carousel owl-theme">
+					<?php for($i=0;$i<sizeof($menu);$i++){
+						echo '
+						<div class="item">
+						<img class="imgCarousel" src="img/menu/'.$menu[$i]->image.'">
+						<div class="description">
+							<p class="type">'.$menu[$i]->type.'</p>
+							<p class="titreMenu">'.$menu[$i]->nom.'</p>
+							<p class="prix">'.$menu[$i]->prix.'€</p>
+						</div>
+						<div class="descriptionHover">
+							<p class="titreMenu">'.$menu[$i]->nom.'</p>
+							<p class="descriptionMenu">'.$menu[$i]->description.'</p>
+							<p class="allergenes">Allergènes : '.$menu[$i]->allergenes.'</p>
+							<div v-on:click="addToCart('.$i.',`'.$menu[$i]->nom.'`,'.$menu[$i]->prix.',`'.$menu[$i]->image.'`)" class="divButton">
+								<a class="buttonMenu">Dégustez le menu</a>
+							</div>
 						</div>
 					</div>
-				</div>
-				';
-				}
-				?>
-				<div class="owl-controls">
+					';
+					}
+					?>
+					<div class="owl-controls">
+					</div>
 				</div>
 			</div>
 		</div>
-		<div>
-			<ul>
-				<li>{{ cart }}</li>
-			</ul>
+		<div class="cart">
+			<div class="container">
+				<div class="row">
+					<div v-for="item in last"> 
+						<div class="col-lg-1">
+							<img class="imgCart" :src="'img/menu/'+item.image"/>
+						</div>
+						<div class="col-lg-2">
+							<p class="titreMenu">{{item.nom}}</p>
+							<p class="prixMenu">{{item.prix}}€</p>
+						</div>
+						<div class="col-lg-2">
+							<div class="cartQte">
+								<img class="chevron" @click="decrementQte(item.id)" src="img/chevronGauche.svg">
+								<div class="qteInput">
+									{{item.qte}}
+								</div>
+								<img class="chevron" @click="incrementQte(item.id)" src="img/chevronDroit.svg">
+							</div>
+						</div>
+						<div class="col-lg-1">
+							<div class="cartDel">
+								<img class="imgCross" src="img/cross.svg">
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-3">
+						<p class="titreMenu">Votre commande :</p>
+						<p>{{prixTotal}}€</p>
+					</div>
+					<div class="col-lg-2">
+						<div class="divButtonCart">
+							<a class="buttonMenu">Commander</a>
+						</div>
+					</div>
+					<div class="col-lg-1">
+						<div class="cartUp">
+							<img class="chevronUp" src="img/chevronUp.svg">
+						</div>
+					</div>
+				</div>
+				<div v-if="cart.length > 1" v-for="item in cart" class="row showCart">
+					<div v-if="item.id==lastId">
+					</div>
+					<div v-else>
+						<div class="col-lg-1">
+							<img class="imgCart" :src="'img/menu/'+item.image"/>
+						</div>
+						<div class="col-lg-5">
+							<p class="titreMenu">{{item.nom}}</p>
+							<p class="prixMenu">{{item.prix}}€</p>
+						</div>
+						<div class="col-lg-3">
+							<div class="cartQte">
+								<img @click="decrementQte(item.id)" class="chevron" src="img/chevronGauche.svg">
+								<div class="qteInput">
+									{{item.qte}}
+								</div>
+								<img @click="incrementQte(item.id)" class="chevron" src="img/chevronDroit.svg">
+							</div>
+						</div>
+						<div class="col-lg-3">
+							<div class="cartDel">
+								<img @click="delItem(item.id)" class="imgCross" src="img/cross.svg">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div> 
 		</div>
 	</div>
-
-	
 	
 	<script type="text/javascript" src="js/jquery-3.2.0.min.js"></script>
 	<script type="text/javascript" src="js/bootstrap.js"></script>
