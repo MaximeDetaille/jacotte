@@ -12,7 +12,7 @@
 	<?php 
 		try{
 			$menu = [];
-			$bdd = new PDO('mysql:host=localhost;dbname=jacotte;charset=utf8', 'root', '');
+			$bdd = new PDO('mysql:host=localhost;dbname=jacotte;charset=utf8', 'root', 'max59251');
 			$query="SELECT * FROM menu";
 			$resultats=$bdd->query($query);
 			$resultats->setFetchMode(PDO::FETCH_OBJ);
