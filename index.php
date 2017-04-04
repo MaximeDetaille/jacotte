@@ -113,9 +113,7 @@
 				</div>
 			</div>
 		</div>
-		{{cart}}
 		<br>
-		{{last}}
 		<div class="cart">
 			<div class="container">
 				<div class="row">
