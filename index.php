@@ -10,45 +10,9 @@
 </head>
 <body>
 	<?php 
-		try{
-			$menu = [];
-			$bdd = new PDO('mysql:host=localhost;dbname=jacotte;charset=utf8', 'root', 'max59251');
-			$query="SELECT * FROM menu";
-			$resultats=$bdd->query($query);
-			$resultats->setFetchMode(PDO::FETCH_OBJ);
-			while($resultat = $resultats->fetch()){
-				array_push($menu,$resultat);
-			}
-			$resultats->closeCursor();
-		}
-
-		catch (Exception $e){
-			die('Erreur : ' . $e->getMessage());
-		}
+	include('bdd.php');
+	include('navbar.php');
 	?>
-	<nav class="navbar navbar-default" role="navigation">
-		<div class="container">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-brand-centered">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<div class="navbar-brand navbar-brand-centered">La cuisine de Jacotte</div>
-			</div>
-
-			
-			<div class="collapse navbar-collapse" id="navbar-brand-centered">
-				<ul class="nav navbar-nav">
-					<!-- <li><a href="#">Gauche</a></li> -->
-				</ul>
-				<ul class="nav navbar-nav navbar-right">   
-					<!-- <li><a href="#">Droite</a></li> -->    
-				</ul>
-			</div>
-		</div>
-	</nav>
 
 	<div class="jumbotron text-center jumb">
 		<div class="container">
@@ -80,7 +44,7 @@
 		</div>
 	</div>
 
-	<div id="menu">
+	<div class="menu">
 		<div class="menu"> 
 			<div class="container">
 				<h1 class="text-center titleHowWorks">De nouveaux menu chaque semaine</h1>
@@ -146,7 +110,7 @@
 					</div>
 					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-4">
 						<div class="divButtonCart">
-							<a class="buttonMenu">Commander</a>
+							<a @click="checkout()" class="buttonMenu">Commander</a>
 						</div>
 					</div>
 					<div class="col-lg-1 col-md-1 col-sm-1 col-xs-2">
@@ -162,11 +126,11 @@
 						<div class="col-lg-1 col-md-1 col-sm-1 col-xs-2">
 							<img class="imgCart" :src="'img/menu/'+item.image"/>
 						</div>
-						<div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
+						<div class="col-lg-2 col-md-2 col-sm-3 col-xs-5">
 							<p class="titreMenu">{{item.nom}}</p>
 							<p class="prixMenu">{{item.prix}}€</p>
 						</div>
-						<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+						<div class="col-lg-2 col-md-2 col-sm-2 col-xs-3">
 							<div class="cartQte">
 								<img @click="decrementQte(item.id)" class="chevron" src="img/chevronGauche.svg">
 								<div class="qteInput">
@@ -175,7 +139,7 @@
 								<img @click="incrementQte(item.id)" class="chevron" src="img/chevronDroit.svg">
 							</div>
 						</div>
-						<div class="col-lg-3 col-md-3 col-sm-3 col-xs-2">
+						<div class="col-lg-1 col-md-1 col-sm-1 col-xs-2">
 							<div class="cartDel" @click="delItem(item.id)">
 								<img class="imgCross" src="img/cross.svg">
 							</div>

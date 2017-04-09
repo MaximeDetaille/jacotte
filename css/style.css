@@ -256,3 +256,7 @@
 #adminMenu{
     display: none;
 }
+
+.titleCheckout{
+    font-size: 22px;
+}

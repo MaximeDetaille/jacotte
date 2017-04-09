@@ -1,5 +1,5 @@
 let vm = new Vue({
-	el:'#menu',
+	el:'.menu',
 	data: {
 		cart: [],
 		prixTotal: 0,
@@ -127,7 +127,14 @@ let vm = new Vue({
 				somme = somme + element.qte * element.prix;
 			})
 			this.prixTotal = somme.toFixed(2);
-		}
+		},
+		checkout : function(){
+			console.log(JSON.stringify(this.cart));
+			var dataString = JSON.stringify(this.cart);
+			$.post('updateCart.php',{data : dataString},function(result){
+				document.location.href="checkout.php";
+			});
+		},
 	}
 })
 
@@ -141,6 +148,19 @@ $(document).ready(function(){
 			$('.showCart').fadeOut();
 			clicked = true;
 		}
-		
-	})
+	});
+
+	console.log($('#hiddenCart').text());
+	if($('#hiddenCart').text()){
+		cart = JSON.parse($('#hiddenCart').text());
+		cart.forEach(function(e){
+			vm.$data.cart.push(e);
+		});
+	}
 })
+
+
+
+
+
+//FAIRE UN INNERHTML avec dedans <?php $_SESSION = this.cart ?> donc pas besoin d'ajax
