@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Mar 04 Avril 2017 à 14:00
+-- Généré le :  Ven 14 Avril 2017 à 00:35
 -- Version du serveur :  5.6.17
--- Version de PHP :  5.6.28
+-- Version de PHP :  5.5.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -23,28 +23,29 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Structure de la table `menu`
+-- Structure de la table `commandemenu`
 --
 
-CREATE TABLE IF NOT EXISTS `menu` (
+CREATE TABLE IF NOT EXISTS `commandemenu` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `nom` text NOT NULL,
-  `description` text NOT NULL,
-  `prix` float NOT NULL,
-  `allergenes` text NOT NULL,
-  `type` text NOT NULL,
-  `image` text NOT NULL,
+  `idMenu` int(11) NOT NULL,
+  `idCommande` int(11) NOT NULL,
+  `qte` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
--- Contenu de la table `menu`
+-- Contenu de la table `commandemenu`
 --
 
-INSERT INTO `menu` (`id`, `nom`, `description`, `prix`, `allergenes`, `type`, `image`) VALUES
-(14, 'Menu d''été', 'Ce menu contient : assortiment de légumes d''été, etc', 12.99, 'gluten, mais, porc', 'Ecolo', '258cbf9ea4a0190534534d22fbafd4b4.jpg'),
-(16, 'Menu lorrain', 'Quiche lorrain + gateau chocolat + boisson', 9.99, 'Gluten, porc, chocolat', 'Gourmand', 'b7a8d3faaf1b9427f86b79a388490f1c.jpg');
+INSERT INTO `commandemenu` (`id`, `idMenu`, `idCommande`, `qte`) VALUES
+(3, 14, 3, 5),
+(4, 16, 3, 3),
+(5, 14, 4, 5),
+(6, 16, 4, 3),
+(7, 14, 5, 1),
+(8, 16, 5, 2);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
