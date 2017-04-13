@@ -260,3 +260,105 @@
 .titleCheckout{
     font-size: 22px;
 }
+
+/* CHECKOUT 2 */
+
+.ville {
+     list-style-type:none;
+     text-align: center;
+     height: 40px;
+     margin: 0px;
+     padding:0px;
+}
+
+.ville li {
+    float:left;
+    margin:0 10px 0 0;
+    width:100px;
+    height:40px;
+    position:relative;
+}
+
+.ville label, .ville input {
+    display:block;
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+}
+
+.ville input[type="radio"] {
+    opacity:0.011;
+    z-index:100;
+}
+
+.ville input[type="radio"]:checked + label {
+    background:#A68D83;
+    color:white;
+    padding:5px;
+    font-weight: 500;
+}
+
+.ville label {
+    background-color: #CCC;
+    color:white;
+    padding:5px;
+    height: 30px;
+    border-radius: 5px;
+    cursor:pointer;
+    z-index:90;
+    font-weight: 500;
+}
+
+.ville label:hover {
+     background:#A68D83;
+     color:white;
+}
+
+.rouge{
+    color:red;
+}
+
+.titleInput{
+    color:#BABABA;
+    margin-top:30px;
+}
+
+.inputAdresse::placeholder,
+.inputNom::placeholder,
+.inputPrenom::placeholder,
+.inputTel::placeholder,
+.inputMail::placeholder{
+    color:#BABABA;
+    font-style: italic;
+}
+
+.inputAdresse{
+    width: 85%;
+    border: none;
+    color:#BABABA;
+    border:1px #CCC solid;
+    border-radius: 5px;
+    padding:5px;
+}
+
+.inputNom,
+.inputPrenom,
+.inputTel,
+.inputMail{
+    width: 70%;
+    border: none;
+    color:#BABABA;
+    border:1px #CCC solid;
+    border-radius: 5px;
+    padding:5px;
+}
+
+.sansMargin{
+    padding:0px;
+}
+
+.verifCheckbox{
+    margin-top: 30px;
+}

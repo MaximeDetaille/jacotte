@@ -64,7 +64,7 @@
 							<p class="titreMenu">'.$menu[$i]->nom.'</p>
 							<p class="descriptionMenu">'.$menu[$i]->description.'</p>
 							<p class="allergenes">Allergènes : '.$menu[$i]->allergenes.'</p>
-							<div v-on:click="addToCart('.$i.',`'.$menu[$i]->nom.'`,'.$menu[$i]->prix.',`'.$menu[$i]->image.'`)" class="divButton">
+							<div v-on:click="addToCart('.$i.',`'.$menu[$i]->id.'`,`'.$menu[$i]->nom.'`,'.$menu[$i]->prix.',`'.$menu[$i]->image.'`)" class="divButton">
 								<a class="buttonMenu">Dégustez le menu</a>
 							</div>
 						</div>
@@ -110,7 +110,7 @@
 					</div>
 					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-4">
 						<div class="divButtonCart">
-							<a @click="checkout()" class="buttonMenu">Commander</a>
+							<a @click="checkout('checkout.php')" class="buttonMenu">Commander</a>
 						</div>
 					</div>
 					<div class="col-lg-1 col-md-1 col-sm-1 col-xs-2">

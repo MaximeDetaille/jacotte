@@ -31,15 +31,11 @@ let vm = new Vue({
 		clearInverval(this.$interval);
 	},
 	methods: {
-		addToCart: function(id,nom,prix,image){
+		addToCart: function(id,idMenu,nom,prix,image){
 			this.lastId = id;
 			$('.cart').fadeIn();
 			if(this.cart.length == 0){
-				console.log("id : "+id);
-				console.log("nom : "+nom);
-				console.log("prix : "+prix);
-				console.log("image : "+image);
-				this.cart.push({'id':id,'qte':1,'nom':nom,'prix':prix,'image':image});
+				this.cart.push({'id':id,'idMenu':idMenu,'qte':1,'nom':nom,'prix':prix,'image':image});
 			} 
 			else{
 				var findIt = false;
@@ -50,7 +46,7 @@ let vm = new Vue({
 					}
 				});
 				if(!findIt){
-					this.cart.push({'id':id,'qte':1,'nom':nom,'prix':prix,'image':image});
+					this.cart.push({'id':id,'idMenu':idMenu,'qte':1,'nom':nom,'prix':prix,'image':image});
 					findIt = false;
 				}
 			}
@@ -85,7 +81,6 @@ let vm = new Vue({
 					if(e.qte == 0){
 						cart.splice(i,1);
 						if(last[0].id==e.id){
-							
 							if(cart.length==0){
 								$('.cart').fadeOut(function(){
 									last.pop();
@@ -122,19 +117,52 @@ let vm = new Vue({
 			this.calcPrixTotal();
 		},
 		calcPrixTotal: function(){
+			console.log("pirxtotal")
 			var somme = 0;
 			this.cart.forEach(function(element){
 				somme = somme + element.qte * element.prix;
 			})
 			this.prixTotal = somme.toFixed(2);
 		},
-		checkout : function(){
+		checkout : function(location){
 			console.log(JSON.stringify(this.cart));
 			var dataString = JSON.stringify(this.cart);
+			console.log(this.cart);
 			$.post('updateCart.php',{data : dataString},function(result){
-				document.location.href="checkout.php";
+				document.location.href=location;
 			});
 		},
+		delItemCheckout: function(id){
+			cart = this.cart;
+			this.cart.forEach(function(e,i){
+				if(e.id == id){
+					cart.splice(i,1);
+					if(cart.length==0){
+						$('.cart').fadeOut(function(){
+							last.pop();
+						});
+					}
+				}
+			})
+			this.calcPrixTotal();
+		},
+		decrementQteCheckout: function(id){
+			cart = this.cart;
+			this.cart.forEach(function(e,i){
+				if(e.id == id){
+					e.qte-=1;
+					if(e.qte == 0){
+						cart.splice(i,1);
+						if(cart.length==0){
+							$('.cart').fadeOut(function(){
+								last.pop();
+							});
+						}
+					}
+				}
+			})
+			this.calcPrixTotal();
+		}
 	}
 })
 
@@ -158,9 +186,3 @@ $(document).ready(function(){
 		});
 	}
 })
-
-
-
-
-
-//FAIRE UN INNERHTML avec dedans <?php $_SESSION = this.cart ?> donc pas besoin d'ajax
