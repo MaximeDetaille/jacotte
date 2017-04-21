@@ -1,7 +1,7 @@
 <?php 
 include('fonctions.php');
 session_start();
-
+var_dump($_SESSION);
 $array = $_SESSION['cart'];
 $json = __json_encode($array);
 ?>

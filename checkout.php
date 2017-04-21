@@ -38,7 +38,7 @@ $json = __json_encode($array);
 								<div class="qteInput">
 									{{item.qte}}
 								</div>
-								<img @click="incrementQte(item.id)" class="chevron" src="img/chevronDroit.svg">
+								<img v-if="item.qte < item.qteStock" @click="incrementQte(item.id)" class="chevron" src="img/chevronDroit.svg">
 							</div>
 						</div>
 						<div class="col-lg-2 col-md-1 col-sm-1 col-xs-2">

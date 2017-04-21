@@ -2,6 +2,7 @@
 include('fonctions.php');
 session_start();
 
+var_dump($_SESSION);
 $array = $_SESSION['cart'];
 $json = __json_encode($array);
 
@@ -30,7 +31,6 @@ try
 		$date = new DateTime('+1 day');
 		$date = $date->format('d/m/Y');
 	}
-
     $bdd = new PDO('mysql:host=localhost;dbname=jacotte;charset=utf8', 'root', '');
     $query="INSERT INTO commande values (
     DEFAULT,
@@ -55,7 +55,49 @@ try
     '".$_SESSION["cart"][$i]["qte"]."'
     )";
     $bdd->query($query);
+
+    $query = "UPDATE entree
+		  SET qte = qte - ".$_SESSION["cart"][$i]["qte"].
+		  " WHERE id = ".$_SESSION["cart"][$i]["idEntree"].
+		  ";";
+
+	var_dump($query);
+	$bdd->query($query);
+
+	$query = "UPDATE plat
+		  SET qte = qte - ".$_SESSION["cart"][$i]["qte"].
+		  " WHERE id = ".$_SESSION["cart"][$i]["idPlat"].
+		  ";";
+
+	var_dump($query);
+	$bdd->query($query);
+
+	$query = "UPDATE dessert
+		  SET qte = qte - ".$_SESSION["cart"][$i]["qte"].
+		  " WHERE id = ".$_SESSION["cart"][$i]["idDessert"].
+		  ";";
+
+	var_dump($query);
+	$bdd->query($query);
+
     }
+
+    $query = "UPDATE fromage
+		  SET qte = qte - ".$_SESSION["cart"][$i]["qte"].
+		  " WHERE id = ".$_SESSION["cart"][$i]["idFromage"].
+		  ";";
+
+	var_dump($query);
+	$bdd->query($query);
+
+	$query = "UPDATE boisson
+		  SET qte = qte - ".$_SESSION["cart"][$i]["qte"].
+		  " WHERE id = ".$_SESSION["cart"][$i]["idBoisson"].
+		  ";";
+
+	var_dump($query);
+	$bdd->query($query);
+
 }
   catch (Exception $e)
   {

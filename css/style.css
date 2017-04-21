@@ -158,6 +158,87 @@
     text-decoration: none;
 }
 
+.menuClassiqueHidden{
+    display: none;
+}
+
+.menuPersoHidden{
+    display: none;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.menuClassiqueDisplay,
+.menuPersoDisplay{
+    padding: 60px;
+}
+
+.divButtonMenu{
+    cursor: pointer;
+    background-color: #A58E7E;
+    width: 30%;
+    text-align: center;
+    color:white;
+    height: 40px;
+    padding-top: 10px;
+    border-radius: 5px;
+    float: right;
+    margin-right: 50px;
+}
+
+.divButtonMenuPerso{
+    cursor: pointer;
+    background-color: #A58E7E;
+    width: 30%;
+    text-align: center;
+    color:white;
+    height: 40px;
+    padding-top: 10px;
+    border-radius: 5px;
+    float: left;
+    margin-left: 50px;
+}
+
+.buttonChoix{
+    background-color: #F0F0F0;
+    color:black;
+    height: 40px;
+    text-align: center;
+    border-radius: 5px;
+    padding-top: 10px;
+}
+
+.buttonChoixActive{
+    background-color: #A58E7E;
+    color:white;
+    height: 40px;
+    text-align: center;
+    border-radius: 5px;
+    padding-top: 10px;
+}
+
+#showEntrees,
+#showPlats,
+#showDesserts,
+#showFromages,
+#showBoissons{
+    display: none;
+}
+
+.showFood{
+    margin-top: 30px;
+}
+
+.divButtonAddMenu{
+    background-color: #A58E7E;
+    height: 40px;
+    border-radius: 5px;
+    padding-top: 10px;
+    width: 30%;
+    margin:auto;
+    cursor: pointer;
+}
+
 /*button A58E7E*/
 
 /* CART */

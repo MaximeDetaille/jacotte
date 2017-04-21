@@ -10,7 +10,13 @@ let vm = new Vue({
 		seconds:36000,
 		heures: -1,
 		minutes:-1,
-		secondes:-1
+		secondes:-1,
+		tmpEntree : "",
+		tmpPlat : "",
+		tmpDessert : "",
+		tmpFromage : "",
+		tmpBoisson : "",
+		nomMenu : ""
 	},
 	mounted: function(){
 		now = new Date();
@@ -31,22 +37,39 @@ let vm = new Vue({
 		clearInverval(this.$interval);
 	},
 	methods: {
-		addToCart: function(id,idMenu,nom,prix,image){
+		addToMenuEntree: function(id,idMenu,nom,prix,image,qte){
+			this.tmpEntree = {'id':id,'idMenu':idMenu,'nom':nom,'prix':prix,'image':image,'qte':qte}
+		},
+		addToMenuPlat: function(id,idMenu,nom,prix,image,qte){
+			this.tmpPlat = {'id':id,'idMenu':idMenu,'nom':nom,'prix':prix,'image':image,'qte':qte}
+		},
+		addToMenuDessert: function(id,idMenu,nom,prix,image,qte){
+			this.tmpDessert = {'id':id,'idMenu':idMenu,'nom':nom,'prix':prix,'image':image,'qte':qte}
+		},
+		addToMenuFromage: function(id,idMenu,nom,prix,image,qte){
+			this.tmpFromage = {'id':id,'idMenu':idMenu,'nom':nom,'prix':prix,'image':image,'qte':qte}
+		},
+		addToMenuBoisson: function(id,idMenu,nom,prix,image,qte){
+			this.tmpBoisson = {'id':id,'idMenu':idMenu,'nom':nom,'prix':prix,'image':image,'qte':qte}
+		},
+		addToCart: function(id,idMenu,nom,prix,image,qte,idEntree,idPlat,idDessert,idFromage,idBoisson){
 			this.lastId = id;
 			$('.cart').fadeIn();
 			if(this.cart.length == 0){
-				this.cart.push({'id':id,'idMenu':idMenu,'qte':1,'nom':nom,'prix':prix,'image':image});
+				this.cart.push({'id':id,'idMenu':idMenu,'qte':1,'nom':nom,'prix':prix,'image':image,'idEntree':idEntree,'idPlat':idPlat,'idDessert':idDessert,'idFromage':idFromage,'idBoisson':idBoisson});
 			} 
 			else{
 				var findIt = false;
 				this.cart.forEach(function(e){
 					if(e.id == id){
 						findIt = true;
-						e.qte += 1;
+						if(e.qte < e.qteStock){
+							e.qte += 1;
+						}
 					}
 				});
 				if(!findIt){
-					this.cart.push({'id':id,'idMenu':idMenu,'qte':1,'nom':nom,'prix':prix,'image':image});
+					this.cart.push({'id':id,'idMenu':idMenu,'qte':1,'nom':nom,'prix':prix,'image':image,'idEntree':idEntree,'idPlat':idPlat,'idDessert':idDessert,'idFromage':idFromage,'idBoisson':idBoisson});
 					findIt = false;
 				}
 			}
@@ -162,6 +185,26 @@ let vm = new Vue({
 				}
 			})
 			this.calcPrixTotal();
+		},
+		addMenuToCart: function(){
+			
+			var prixMenu = 0;
+			if(this.tmpEntree!=""){prixMenu += this.tmpEntree.prix}
+			if(this.tmpPlat!=""){prixMenu += this.tmpPlat.prix}
+			if(this.tmpDessert!=""){prixMenu += this.tmpDessert.prix}
+			if(this.tmpFromage!=""){prixMenu += this.tmpFromage.prix}
+			if(this.tmpBoisson!=""){prixMenu += this.tmpBoisson.prix}
+			
+			menu = {'nom':this.nomMenu,'prix':prixMenu,'type':"personnalisé",'image':"defaultMenu.png",'idEntree':this.tmpEntree.idMenu,'idPlat':this.tmpPlat.idMenu,'idDessert':this.tmpDessert.idMenu,'idFromage':this.tmpFromage.idMenu,'idBoisson':this.tmpBoisson.idMenu,'perso':1}
+			var dataString = JSON.stringify(menu);
+			result = "";
+			$.post("ajax.php?method=createMenu",{data : dataString},function(data, status){
+		        result = data;
+		        vm.endCart(result,prixMenu);
+		    });
+		},
+		endCart: function(result,prixMenu){
+			this.addToCart(this.lastId+1,result,this.nomMenu,prixMenu,"defaultMenu.png",1,this.tmpEntree.idMenu,this.tmpPlat.idMenu,this.tmpDessert.idMenu,this.tmpFromage.idMenu,this.tmpBoisson.idMenu);
 		}
 	}
 })
