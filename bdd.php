@@ -2,7 +2,7 @@
 		session_start();
 		try{
 			$menu = [];
-			$bdd = new PDO('mysql:host=localhost;dbname=jacotte;charset=utf8', 'root', '');
+			$bdd = new PDO('mysql:host=localhost;dbname=jacotte;charset=utf8', 'root', 'root');
 			$query="SELECT * FROM menu";
 			$resultats=$bdd->query($query);
 			$resultats->setFetchMode(PDO::FETCH_OBJ);
@@ -56,22 +56,6 @@
 			}
 			$resultats->closeCursor();
 
-			var_dump($menu);
-			echo "<br>";
-			echo "<br>";
-			var_dump($entree);
-			echo "<br>";
-			echo "<br>";
-			var_dump($plat);
-			echo "<br>";
-			echo "<br>";
-			var_dump($dessert);
-			echo "<br>";
-			echo "<br>";
-			var_dump($boisson);
-			echo "<br>";
-			echo "<br>";
-			var_dump($fromage);
 		}
 
 		catch (Exception $e){

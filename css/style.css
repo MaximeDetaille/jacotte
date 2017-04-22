@@ -237,6 +237,7 @@
     width: 30%;
     margin:auto;
     cursor: pointer;
+    text-align: center;
 }
 
 /*button A58E7E*/
@@ -334,7 +335,8 @@
 
 /* ADMIN */
 
-#adminMenu{
+#adminMenu,
+#adminProduit{
     display: none;
 }
 

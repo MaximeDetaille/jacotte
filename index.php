@@ -12,23 +12,6 @@
 	<?php 
 	include('bdd.php');
 	include('navbar.php');
-
-			var_dump($menu);
-			echo "<br>";
-			echo "<br>";
-			var_dump($entree);
-			echo "<br>";
-			echo "<br>";
-			var_dump($plat);
-			echo "<br>";
-			echo "<br>";
-			var_dump($dessert);
-			echo "<br>";
-			echo "<br>";
-			var_dump($boisson);
-			echo "<br>";
-			echo "<br>";
-			var_dump($fromage);
 	?>
 
 	<div class="jumbotron text-center jumb">
@@ -155,7 +138,7 @@
 								if($entree[$i]->qte > 0) { 
 									echo '
 								<div class="item">
-									<img class="imgCarousel" src="img/menu/'.$entree[$i]->image.'">
+									<img class="imgCarousel" src="img/produit/'.$entree[$i]->image.'">
 									<div class="description">
 										<p class="type">'.$entree[$i]->type.'</p>
 										<p class="titreMenu">'.$entree[$i]->nom.'</p>
@@ -176,12 +159,6 @@
 							<div class="owl-controls">
 							</div>
 						</div>
-						<div>
-							<p>Nom de votre menu : <input v-model="nomMenu" type="text" name="nomMenu"></p>
-						</div>
-						<div @click="addMenuToCart()" class="divButtonAddMenu">
-							<p class="buttonMenu">Ajouter mon menu au panier</p>
-						</div>
 					</div>
 				</div>
 				<div id="showPlats" class="showFood text-center">
@@ -192,7 +169,7 @@
 								if($plat[$i]->qte > 0) { 
 									echo '
 								<div class="item">
-									<img class="imgCarousel" src="img/menu/'.$plat[$i]->image.'">
+									<img class="imgCarousel" src="img/produit/'.$plat[$i]->image.'">
 									<div class="description">
 										<p class="type">'.$plat[$i]->type.'</p>
 										<p class="titreMenu">'.$plat[$i]->nom.'</p>
@@ -213,9 +190,6 @@
 							<div class="owl-controls">
 							</div>
 						</div>
-						<div @click="addMenuToCart()" class="divButtonAddMenu">
-							<p class="buttonMenu">Ajouter mon menu au panier</p>
-						</div>
 					</div>
 				</div>
 				<div id="showDesserts" class="showFood text-center">
@@ -226,7 +200,7 @@
 								if($dessert[$i]->qte > 0) { 
 									echo '
 								<div class="item">
-									<img class="imgCarousel" src="img/menu/'.$dessert[$i]->image.'">
+									<img class="imgCarousel" src="img/produit/'.$dessert[$i]->image.'">
 									<div class="description">
 										<p class="type">'.$dessert[$i]->type.'</p>
 										<p class="titreMenu">'.$dessert[$i]->nom.'</p>
@@ -247,9 +221,6 @@
 							<div class="owl-controls">
 							</div>
 						</div>
-						<div @click="addMenuToCart()" class="divButtonAddMenu">
-							<p class="buttonMenu">Ajouter mon menu au panier</p>
-						</div>
 					</div>
 				</div>
 				<div id="showFromages" class="showFood text-center">
@@ -260,7 +231,7 @@
 								if($fromage[$i]->qte > 0) { 
 									echo '
 								<div class="item">
-									<img class="imgCarousel" src="img/menu/'.$fromage[$i]->image.'">
+									<img class="imgCarousel" src="img/produit/'.$fromage[$i]->image.'">
 									<div class="description">
 										<p class="type">'.$fromage[$i]->type.'</p>
 										<p class="titreMenu">'.$fromage[$i]->nom.'</p>
@@ -281,9 +252,6 @@
 							<div class="owl-controls">
 							</div>
 						</div>
-						<div @click="addMenuToCart()" class="divButtonAddMenu">
-							<p class="buttonMenu">Ajouter mon menu au panier</p>
-						</div>
 					</div>
 				</div>
 				<div id="showBoissons" class="showFood text-center">
@@ -294,7 +262,7 @@
 								if($boisson[$i]->qte > 0) { 
 									echo '
 								<div class="item">
-									<img class="imgCarousel" src="img/menu/'.$boisson[$i]->image.'">
+									<img class="imgCarousel" src="img/produit/'.$boisson[$i]->image.'">
 									<div class="description">
 										<p class="type">'.$boisson[$i]->type.'</p>
 										<p class="titreMenu">'.$boisson[$i]->nom.'</p>
@@ -315,12 +283,11 @@
 							<div class="owl-controls">
 							</div>
 						</div>
-						<div @click="addMenuToCart()" class="divButtonAddMenu">
-							<p class="buttonMenu">Ajouter mon menu au panier</p>
-						</div>
 					</div>
 				</div>
-				{{cart}}
+				<div @click="addMenuToCart()" class="divButtonAddMenu">
+					<p class="buttonMenu">Ajouter mon menu au panier</p>
+				</div>
 			</div>
 			<br>
 			<div class="cart">
