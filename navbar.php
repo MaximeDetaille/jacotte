@@ -1,23 +1,20 @@
-<nav class="navbar navbar-default" role="navigation">
-		<div class="container">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-brand-centered">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<div class="navbar-brand navbar-brand-centered">La cuisine de Jacotte</div>
-			</div>
-
-			
-			<div class="collapse navbar-collapse" id="navbar-brand-centered">
-				<ul class="nav navbar-nav">
-					<!-- <li><a href="#">Gauche</a></li> -->
-				</ul>
-				<ul class="nav navbar-nav navbar-right">   
-					<!-- <li><a href="#">Droite</a></li> -->    
-				</ul>
-			</div>
-		</div>
-	</nav>
+<nav class="navbar navbar-default navbar-perso">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <div class="navbar-brand navbar-brand"><a href="http://www.lacuisinedejacotte.fr/"><img src="img/logo.jpg"></a></div>
+        </div>
+        <div class="collapse navbar-collapse navbar-margin" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="itemNav"><a class="smoothScroll" href="#menu"></span>Personnalisé mon menu</a></li>
+                <li class="itemNav"><a href="#"></span>Produit de qualité</a></li>
+                <!-- <li class="itemNav"><a href="#"></span>Blog</a></li> -->
+                <li class="itemNav"><a href="#"></span>Contact</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>

@@ -1,3 +1,13 @@
+@font-face {
+  font-family: "merri";
+  src: url("../fonts/Merriweather/Merriweather-Regular.ttf");
+}
+
+body{
+    background-color: #F9F9F9;
+    overflow-x:hidden;
+}
+
 .navbar-brand-centered {
         position: absolute;
         left: 50%;
@@ -15,10 +25,25 @@
     margin-bottom: 0px;
 }
 
+.navbar-perso{
+    background-color: white;
+    height: 80px;
+}
+
+.navbar-margin{
+    margin-top: 15px;
+}
+
+.itemNav a{
+    font-size: 16px;
+    cursor: pointer;
+}
+
 .jumb{
     height: 700px;
     background-image: url('../img/background_jacotte.jpg');
     background-size: cover;
+    background-position: center;
 }
 
 .titleJumb{
@@ -26,6 +51,7 @@
     padding-left:20%;
     padding-right: 20%;
     margin-bottom: 60px;
+    font-family: "merri";
 }
 
 .buttonJumb{
@@ -33,6 +59,14 @@
     color:white;
     padding:15px 50px 15px 50px;
     border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+
+}
+
+.buttonJumb:hover{
+    text-decoration: none;
+    color:white;
 }
 
 .howWork{
@@ -44,9 +78,14 @@
     padding-right: 5%;
 }
 
+.divPicto h3{
+    font-family: "merri";
+}
+
 .titleHowWorks{
     padding-bottom: 40px;
     margin-top: 40px;
+    font-family: "merri";
 }
 
 .picto{
@@ -56,11 +95,7 @@
 }
 
 .textPicto{
-    color:#DEDCDE;
-}
-
-#menu{
-    margin-bottom:200px;
+    color: #9A9A9A;
 }
 
 .item{
@@ -69,7 +104,7 @@
     width: 300px;
     margin-top: 10px;
     margin-bottom: 10px;
-    box-shadow: 0px 0px 10px 1px rgba(0,0,0,0.5);
+    box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.3);
     border-radius: 5px;
 }
 
@@ -112,16 +147,32 @@
 .descriptionHover{
     display: none;
     position: absolute;
+    width: inherit;
+    height: 374px;
+    margin-top: 10px;
+    padding-top: 40px;
+    padding-right: 30px;
+    padding-left: 30px;
+    border-radius: 5px;
+    color: white;
+    top: 0px;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.descriptionVictime{
+    display: none;
+    position: absolute;
     text-align: center;
     width: 100%;
     height: 95%;
     margin-top: 10px;
-    padding-top: 40px;
+    padding-top: 150px;
     padding-right: 10%;
     padding-left: 10%;
     border-radius: 5px;
     color: white;
     top: 0px;
+    font-size: 26px;
     background-color: rgba(0, 0, 0, 0.7)
 }
 
@@ -163,20 +214,24 @@
 }
 
 .menuPersoHidden{
-    display: none;
     padding-top: 20px;
     padding-bottom: 20px;
 }
 
-.menuClassiqueDisplay,
+.menuClassiqueDisplay{
+    padding: 60px;
+    background-color: blue;
+}
+
 .menuPersoDisplay{
     padding: 60px;
+    background-color: red;
 }
 
 .divButtonMenu{
     cursor: pointer;
     background-color: #A58E7E;
-    width: 30%;
+    width: 40%;
     text-align: center;
     color:white;
     height: 40px;
@@ -189,7 +244,7 @@
 .divButtonMenuPerso{
     cursor: pointer;
     background-color: #A58E7E;
-    width: 30%;
+    width: 40%;
     text-align: center;
     color:white;
     height: 40px;
@@ -206,9 +261,11 @@
     text-align: center;
     border-radius: 5px;
     padding-top: 10px;
+    cursor: pointer;
 }
 
 .buttonChoixActive{
+    cursor: pointer;
     background-color: #A58E7E;
     color:white;
     height: 40px;
@@ -222,7 +279,7 @@
 #showDesserts,
 #showFromages,
 #showBoissons{
-    display: none;
+    display: block;
 }
 
 .showFood{
@@ -251,15 +308,16 @@
     width: 100%;
     z-index: 10000;
     padding-top: 10px;
-    box-shadow: 0px 0px 10px 1px rgba(0,0,0,0.5);
+    box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.3);
     background-color: white;
+    right: 0;
 }
 
 .imgCart{
     width: 40px;
     height: 40px;
     border-radius: 5px;
-    box-shadow: 0px 0px 10px 1px rgba(0,0,0,0.5);
+    box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.3);
 }
 
 .divButtonCart{
@@ -445,3 +503,305 @@
 .verifCheckbox{
     margin-top: 30px;
 }
+
+.footer{
+    width: 100%;
+    background-color: white;
+    padding-top: 80px;
+    padding-bottom: 30px;
+    padding-right: 10%;
+    padding-left: 10%;
+}
+
+.right-float{
+    float: right;
+}
+
+.footer2{
+    padding-top: 20px;
+    color: white;
+    height: 60px;
+    width: 100%;
+    background-color: #A58E7E;
+}
+
+.showDesc{
+    height: 25px;
+    width: 25px;
+    position: absolute;
+    z-index: 99999;
+    color: white;
+    margin-left: 20px;
+    top: 30px;
+    border: 2px white solid;
+    padding-left: 9px;
+    padding-right: 9px;
+    border-radius: 50%;
+    background-color: black;
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+.showInCart{
+    width: 25px;
+    height: 25px;
+    padding-top:4px;
+    position: absolute;
+    z-index: 99999;
+    color: white;
+    top:260px;
+    margin-left: 250px;
+    border-radius: 50%;
+    background-color: black;
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+.tick{
+    display: none;
+}
+
+.tickPad{
+    padding-left: 7px;
+}
+
+.hitbox{
+    top: 70px;
+    height: 314px;
+    width: 300px;
+    position: absolute;
+    cursor: pointer;
+}
+
+.sliderQualite{
+    height: 300px;
+    background-color: white;
+}
+
+.imgSlider{
+    height: 100%;
+    background: url(../img/produitQualite.jpg) no-repeat;
+}
+
+.imgSlider h1{
+    font-family: "merri";
+    font-size: 26px;
+    text-shadow: 0px 0px 5px rgba(255,255,255,0.8);
+}
+
+.imgSlider p{
+    text-shadow: 0px 0px 5px rgba(255,255,255,0.8);
+}
+
+.textSlider{
+    background-color: white;
+    height: 100%;
+    padding-top:30px;
+    padding-bottom: 50px;
+}
+
+.nomMenu{
+    display: none;
+    box-shadow:0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.3);
+    color:white;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    background-color: #A68D83;
+    border-radius: 5px;
+}
+
+.nomMenu input{
+    padding:5px;
+    color:black;
+    border: none;
+    width: 20%;
+    border-radius: 5px;
+    height: 30px;
+}
+
+.buttonOkParent{
+    cursor: pointer;
+    box-shadow:0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.3);
+    color:black;
+    border-radius: 5px;
+    padding-top: 10px;
+    background-color: white;
+    margin-top: 20px;
+}
+
+.victime{
+        position: absolute;
+    top: 100px;
+    left: 5px;
+    font-size: 24px;
+    color: red;
+    z-index: 9999999;
+}
+
+.imgVictime{
+    opacity: 0.3;
+}
+
+.tooLong{
+    width: 210px !important;
+}
+
+.navbar-default .navbar-collapse, .navbar-default .navbar-form{
+    background-color: white;
+}
+
+@media (max-width: 500px){
+
+    .navbar-margin{
+        margin-top: 28px;
+    }
+
+    .titleJumb{
+        font-size: 20px !important;
+        padding-left: 10% !important;
+        padding-right: 10% !important;
+    }
+
+    .menu .row{
+        margin-right: 10px;
+        margin-left: 10px;
+    }
+
+    .inputMenu{
+        width: 100% !important;
+    }
+
+    #entrees,
+    #plats,
+    #desserts,
+    #fromages,
+    #boissons{
+        margin-bottom: 10px;
+        margin-top: 10px;
+    }
+
+    #showEntrees,
+    #showPlats,
+    #showDesserts,
+    #showFromages,
+    #showBoissons{
+        margin-left: -10px;
+    }
+
+    .divButtonAddMenu{
+        width: 80% !important;
+    }
+
+    .showFood .container{
+        padding-right: 0px;
+        padding-left: 0px;
+    }
+
+    .menuPersoHidden{
+        padding-right: 0px;
+        padding-left: 0px;
+    }
+
+    .sliderQualite{
+        height: 100%;
+    }
+
+    .footer{
+        padding-top: 10px;
+    }
+
+    .footer2{
+        height: 100%;
+    }
+
+    .hideMobile{
+        display: none;
+    }
+
+    .mobileCenter{
+        text-align: center;
+    }
+
+    .showFood .container{
+        width: 80% !important;
+    }
+}
+
+.slick-slide{
+    margin-right: 10px;
+    margin-left: 10px;
+    height: 370px;
+    width: 300px !important;
+}
+
+.slick-track{
+    padding-left: 5px;
+}
+
+.slick-next {
+    right: -35px;
+}
+
+.slick-prev {
+    left: -35px;
+}
+
+.slick-prev.slick-disabled:before, .slick-next.slick-disabled:before {
+    opacity: 1;
+    color: black;
+}
+
+.slick-prev:before, .slick-next:before {
+    font-family: 'slick';
+    font-size: 20px;
+    line-height: 1;
+    opacity: 1;
+    color: black;
+    -webkit-font-smoothing: antialiased;
+}
+
+.slick-prev, .slick-next {
+    font-size: 0;
+    line-height: 0;
+    position: absolute;
+    top: 50%;
+    display: block;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    -webkit-transform: translate(0, -50%);
+    -ms-transform: translate(0, -50%);
+    transform: translate(0, -50%);
+    cursor: pointer;
+    color: transparent;
+    border: 1px black solid;
+    outline: none;
+    color: black;
+    border-radius: 50%;
+}
+
+.slick-arrow{
+    color:black;
+}
+
+@media (max-width: 767px){
+    .showFood .container{
+        width: 90%;
+    }
+}
+
+.showEntreeSupp,
+.showPlatSupp,
+.showDessertSupp,
+.showFromageSupp,
+.showBoissonSupp{
+    display: none;
+}
+
+
+
+
+
+

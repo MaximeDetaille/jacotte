@@ -7,103 +7,19 @@
 		<link rel="stylesheet" type="text/css" href="css/owl.theme.default.css">
 		<link rel="stylesheet" type="text/css" href="css/owl.carousel.css">
 		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 	</head>
 	<body>
 		<?php include('bdd.php'); ?>
-		<script type="text/javascript">
-			$.post("bdd.php",function(data, status){});
-		</script>
 		<div class="container">
 			<div class="choix row">
 				<h1 class="text-center">Que souhaitez-vous faire ?</h1>
 				<div class="btn-group">
-					<h3 id="addMenu" class="btn btn-success">Ajouter un menu</h3>
-				</div>
-				<div class="btn-group">
 					<h3 id="addProduit" class="btn btn-success">Ajouter un produit</h3>
 				</div>
-			</div>
-		
-
-			<div id="adminMenu">
-				<h1>Ajouter un menu</h1>
-				<form action="backoffice.php?method=menu" method="post" enctype="multipart/form-data">
-					<div class="form-group">
-						<label for="email">Nom du menu</label>
-						<input type="text" class="form-control" name="menuName">
-					</div>
-					<div class="form-group">
-						<label for="email">Description du menu</label>
-						<input type="text" class="form-control" name="menuDesc">
-					</div>
-					<div class="form-group">
-						<label for="pwd">Prix du menu</label>
-						<input type="text" class="form-control" name="menuPrix">
-					</div>
-					<div class="form-group">
-						<label for="pwd">Allergenes (séparé par un virgule)</label>
-						<input type="text" class="form-control" name="menuAllergenes">
-					</div>
-					<div class="form-group">
-						<label for="pwd">Type de menu (Sportif, Gourmand etc)</label>
-						<input type="text" class="form-control" name="menuType">
-					</div>
-					<div class="form-group">
-						<label for="pwd">Image du menu</label>
-						<input type="file" class="form-control" name="menuImage">
-					</div>
-					<div>
-						<label for="menuEntree">Entrée du menu</label>
-						<select name="menuEntree" id="menuEntree">
-							<?php for($i=0;$i<sizeof($entree);$i++){
-									if($entree[$i]->qte!=0)
-										echo "<option value='".$entree[$i]->id."'>".$entree[$i]->nom."</option>";
-								} 
-							?>
-						</select>
-					</div>
-					<div>
-						<label for="menuPlat">Plat du menu</label>
-						<select name="menuPlat" id="menuPlat">
-							<?php for($i=0;$i<sizeof($plat);$i++){
-									if($plat[$i]->qte!=0)
-										echo "<option value='".$plat[$i]->id."'>".$plat[$i]->nom."</option>";
-								} 
-							?>
-						</select>
-					</div>
-					<div>
-						<label for="menuDessert">Dessert du menu</label>
-						<select name="menuDessert" id="menuDessert">
-							<?php for($i=0;$i<sizeof($dessert);$i++){
-									if($dessert[$i]->qte!=0)
-										echo "<option value='".$dessert[$i]->id."'>".$dessert[$i]->nom."</option>";
-								} 
-							?>
-						</select>
-					</div>
-					<div>
-						<label for="menuFromage">Fromage du menu</label>
-						<select name="menuFromage" id="menuFromage">
-							<?php for($i=0;$i<sizeof($fromage);$i++){
-									if($fromage[$i]->qte!=0)
-										echo "<option value='".$fromage[$i]->id."'>".$fromage[$i]->nom."</option>";
-								} 
-							?>
-						</select>
-					</div>
-					<div>
-						<label for="menuBoisson">Entrée du menu</label>
-						<select name="menuBoisson" id="menuBoisson">
-							<?php for($i=0;$i<sizeof($boisson);$i++){
-									if($boisson[$i]->qte!=0)
-										echo "<option value='".$boisson[$i]->id."'>".$boisson[$i]->nom."</option>";
-								} 
-							?>
-						</select>
-					</div>
-					<button type="submit" class="btn btn-default">Submit</button>
-				</form>
+				<div class="btn-group">
+					<h3 id="delProduit" class="btn btn-danger">Supprimer un produit</h3>
+				</div>
 			</div>
 		</div>
 
@@ -154,6 +70,85 @@
 			</div>
 		</div>
 
+		<?php 
+
+		?>
+
+		<div id="suppressionProduit">
+			<div class="container">
+				<h1>Supprimer un Produit</h1>
+				<div class="container">
+					<div class="choix row">
+						<h1 class="text-center">Que souhaitez-vous faire ?</h1>
+						<div class="btn-group">
+							<h3 id="showEntree" class="btn btn-success">Entrée</h3>
+						</div>
+						<div class="btn-group">
+							<h3 id="showPlat" class="btn btn-success">Plat</h3>
+						</div>
+						<div class="btn-group">
+							<h3 id="showDessert" class="btn btn-success">Dessert</h3>
+						</div>
+						<div class="btn-group">
+							<h3 id="showFromage" class="btn btn-success">Fromage</h3>
+						</div>
+						<div class="btn-group">
+							<h3 id="showBoisson" class="btn btn-success">Boisson</h3>
+						</div>
+					</div>
+				</div>
+				<form action="backoffice.php?method=supprimer" method="post" enctype="multipart/form-data">
+					<div class="showEntreeSupp">
+						<?php 
+						for($i=0;$i<sizeof($entree);$i++){
+							echo '<div class="showProduitSupp">';
+							echo '<p id='.$entree[$i]->id.'>'.$entree[$i]->nom.'</p>';
+							echo '</div>';
+						} 
+						?>
+					</div>
+					<div class="showPlatSupp">
+						<?php 
+						for($i=0;$i<sizeof($plat);$i++){
+							echo '<div class="showProduitSupp">';
+							echo '<p id='.$plat[$i]->id.'>'.$plat[$i]->nom.'</p>';
+							echo '</div>';
+						} 
+						?>
+					</div>
+					<div class="showDessertSupp">
+						<?php 
+						for($i=0;$i<sizeof($dessert);$i++){
+							echo '<div class="showProduitSupp">';
+							echo '<p id='.$dessert[$i]->id.'>'.$dessert[$i]->nom.'</p>';
+							echo '</div>';
+						} 
+						?>
+					</div>
+					<div class="showFromageSupp">
+						<?php 
+						for($i=0;$i<sizeof($fromage);$i++){
+							echo '<div class="showProduitSupp">';
+							echo '<p id='.$fromage[$i]->id.'>'.$fromage[$i]->nom.'</p>';
+							echo '</div>';
+						} 
+						?>
+					</div>
+					<div class="showBoissonSupp">
+						<?php 
+						for($i=0;$i<sizeof($boisson);$i++){
+							echo '<div class="showProduitSupp">';
+							echo '<p id='.$boisson[$i]->id.'>'.$boisson[$i]->nom.'</p>';
+
+							echo '</div>';
+						} 
+						?>
+					</div>
+					<button type="submit" class="btn btn-default">Submit</button>
+				</form>
+			</div>
+		</div>
+
 		<script type="text/javascript" src="js/jquery-3.2.0.min.js"></script>
 		<script type="text/javascript" src="js/bootstrap.js"></script>
 		<script src="https://cdn.jsdelivr.net/vue.resource/1.2.1/vue-resource.min.js"></script>
@@ -168,6 +163,26 @@
 			$('#addProduit').click(function () {
 				$('#adminProduit').toggle();
 			})
+
+			$('#showEntree').click(function(){
+				$('.showEntreeSupp').toggle();
+			});
+
+			$('#showPlat').click(function(){
+				$('.showPlatSupp').toggle();
+			});
+
+			$('#showDessert').click(function(){
+				$('.showDessertSupp').toggle();
+			});
+
+			$('#showFromage').click(function(){
+				$('.showFromageSupp').toggle();
+			});
+
+			$('#showBoisson').click(function(){
+				$('.showBoissonSupp').toggle();
+			});
 		</script>
 	</body>
 </html>

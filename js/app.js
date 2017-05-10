@@ -16,7 +16,15 @@ let vm = new Vue({
 		tmpDessert : "",
 		tmpFromage : "",
 		tmpBoisson : "",
-		nomMenu : ""
+		nomMenu : "",
+		prixMenu : 0,
+		prixEntree : 0,
+		prixPlat : 0,
+		prixDessert : 0,
+		prixFromage : 0,
+		prixBoisson : 0,
+		imageMenu : [{'entree':"0",'plat':"0",'dessert':"0",'fromage':"0",'boisson':"0"}],
+		imageMenuEnd : "",
 	},
 	mounted: function(){
 		now = new Date();
@@ -38,19 +46,34 @@ let vm = new Vue({
 	},
 	methods: {
 		addToMenuEntree: function(id,idMenu,nom,prix,image,qte){
+			this.imageMenu.entree = image;
+			this.prixEntree = prix;
 			this.tmpEntree = {'id':id,'idMenu':idMenu,'nom':nom,'prix':prix,'image':image,'qte':qte}
+			this.calcPrixMenu();
 		},
 		addToMenuPlat: function(id,idMenu,nom,prix,image,qte){
+			this.imageMenu.plat = image;
+			this.prixPlat = prix;
 			this.tmpPlat = {'id':id,'idMenu':idMenu,'nom':nom,'prix':prix,'image':image,'qte':qte}
+			this.calcPrixMenu();
 		},
 		addToMenuDessert: function(id,idMenu,nom,prix,image,qte){
+			this.imageMenu.dessert = image;
+			this.prixDessert = prix;
 			this.tmpDessert = {'id':id,'idMenu':idMenu,'nom':nom,'prix':prix,'image':image,'qte':qte}
+			this.calcPrixMenu();
 		},
 		addToMenuFromage: function(id,idMenu,nom,prix,image,qte){
+			this.imageMenu.fromage = image;
+			this.prixFromage = prix;
 			this.tmpFromage = {'id':id,'idMenu':idMenu,'nom':nom,'prix':prix,'image':image,'qte':qte}
+			this.calcPrixMenu();
 		},
 		addToMenuBoisson: function(id,idMenu,nom,prix,image,qte){
+			this.imageMenu.boisson = image;
+			this.prixBoisson = prix;
 			this.tmpBoisson = {'id':id,'idMenu':idMenu,'nom':nom,'prix':prix,'image':image,'qte':qte}
+			this.calcPrixMenu();
 		},
 		addToCart: function(id,idMenu,nom,prix,image,qte,idEntree,idPlat,idDessert,idFromage,idBoisson){
 			this.lastId = id;
@@ -151,7 +174,10 @@ let vm = new Vue({
 			console.log(JSON.stringify(this.cart));
 			var dataString = JSON.stringify(this.cart);
 			console.log(this.cart);
-			$.post('updateCart.php',{data : dataString},function(result){
+			if(this.cart.length<4){
+				this.prixTotal = (parseFloat(this.prixTotal) + 3).toFixed(2);
+			}
+			$.post('updateCart.php?prix='+this.prixTotal,{data : dataString},function(result){
 				document.location.href=location;
 			});
 		},
@@ -188,24 +214,63 @@ let vm = new Vue({
 		},
 		addMenuToCart: function(){
 			
-			var prixMenu = 0;
-			if(this.tmpEntree!=""){prixMenu += this.tmpEntree.prix}
-			if(this.tmpPlat!=""){prixMenu += this.tmpPlat.prix}
-			if(this.tmpDessert!=""){prixMenu += this.tmpDessert.prix}
-			if(this.tmpFromage!=""){prixMenu += this.tmpFromage.prix}
-			if(this.tmpBoisson!=""){prixMenu += this.tmpBoisson.prix}
-			
-			menu = {'nom':this.nomMenu,'prix':prixMenu,'type':"personnalisé",'image':"defaultMenu.png",'idEntree':this.tmpEntree.idMenu,'idPlat':this.tmpPlat.idMenu,'idDessert':this.tmpDessert.idMenu,'idFromage':this.tmpFromage.idMenu,'idBoisson':this.tmpBoisson.idMenu,'perso':1}
+			if(this.imageMenu.plat){
+				this.imageMenuEnd = this.imageMenu.plat;
+			}
+			else{
+				if(this.imageMenu.entree){
+					this.imageMenuEnd = this.imageMenu.entree;
+				}
+				else{
+					if(this.imageMenu.dessert){
+						this.imageMenuEnd = this.imageMenu.dessert;
+					}
+					else{
+						if(this.imageMenu.fromage){
+							this.imageMenuEnd = this.imageMenu.fromage;
+						}
+						else{
+							this.imageMenuEnd = this.imageMenu.boisson;
+						}
+					}
+				}
+			}
+			menu = {'nom':this.nomMenu,'prix':this.prixMenu,'type':"personnalisé",'image':this.imageMenuEnd,'idEntree':this.tmpEntree.idMenu,'idPlat':this.tmpPlat.idMenu,'idDessert':this.tmpDessert.idMenu,'idFromage':this.tmpFromage.idMenu,'idBoisson':this.tmpBoisson.idMenu,'perso':1}
 			var dataString = JSON.stringify(menu);
 			result = "";
 			$.post("ajax.php?method=createMenu",{data : dataString},function(data, status){
 		        result = data;
-		        vm.endCart(result,prixMenu);
+		        vm.endCart(result,this.prixMenu);
 		    });
 		},
 		endCart: function(result,prixMenu){
-			this.addToCart(this.lastId+1,result,this.nomMenu,prixMenu,"defaultMenu.png",1,this.tmpEntree.idMenu,this.tmpPlat.idMenu,this.tmpDessert.idMenu,this.tmpFromage.idMenu,this.tmpBoisson.idMenu);
+			this.addToCart(this.lastId+1,result,this.nomMenu,this.prixMenu,this.imageMenuEnd,1,this.tmpEntree.idMenu,this.tmpPlat.idMenu,this.tmpDessert.idMenu,this.tmpFromage.idMenu,this.tmpBoisson.idMenu);
+			this.nomMenu = "";
+			this.prixEntree = 0;
+			this.prixPlat = 0;
+			this.prixDessert = 0;
+			this.prixFromage = 0;
+			this.prixBoisson = 0;
+			this.prixMenu = 0;
+		},
+		calcPrixMenu(){
+			if((this.prixEntree != 0) && (this.prixPlat != 0) && (this.prixDessert != 0) && (this.prixBoisson != 0)){
+				this.prixMenu = 11.50;
+			}else{
+				if(((this.prixEntree != 0) && (this.prixPlat != 0) && (this.prixBoisson != 0)) || ((this.prixBoisson != 0) && (this.prixPlat != 0) && (this.prixDessert))){
+				this.prixMenu = 9.90;
+				}
+				else{
+					if((this.prixPlat != 0) && (this.prixBoisson !=0)){
+						this.prixMenu = 6.90;
+					}else{
+						this.prixMenu = this.prixEntree + this.prixPlat + this.prixDessert + this.prixFromage + this.prixBoisson;
+					}
+				}
+			}
+			this.prixMenu = this.prixMenu.toFixed(2);
 		}
+
 	}
 })
 

@@ -12,7 +12,7 @@
 			$resultats->closeCursor();
 			
 			$entree = [];
-			$query="SELECT * FROM entree";
+			$query="SELECT * FROM entree ORDER BY qte DESC";
 			$resultats=$bdd->query($query);
 			$resultats->setFetchMode(PDO::FETCH_OBJ);
 			while($resultat = $resultats->fetch()){
@@ -21,7 +21,7 @@
 			$resultats->closeCursor();
 
 			$plat = [];
-			$query="SELECT * FROM plat";
+			$query="SELECT * FROM plat ORDER BY qte DESC";
 			$resultats=$bdd->query($query);
 			$resultats->setFetchMode(PDO::FETCH_OBJ);
 			while($resultat = $resultats->fetch()){
@@ -30,7 +30,7 @@
 			$resultats->closeCursor();
 
 			$dessert = [];
-			$query="SELECT * FROM dessert";
+			$query="SELECT * FROM dessert ORDER BY qte DESC";
 			$resultats=$bdd->query($query);
 			$resultats->setFetchMode(PDO::FETCH_OBJ);
 			while($resultat = $resultats->fetch()){
@@ -39,7 +39,7 @@
 			$resultats->closeCursor();
 
 			$fromage = [];
-			$query="SELECT * FROM fromage";
+			$query="SELECT * FROM fromage ORDER BY qte DESC";
 			$resultats=$bdd->query($query);
 			$resultats->setFetchMode(PDO::FETCH_OBJ);
 			while($resultat = $resultats->fetch()){
@@ -48,7 +48,7 @@
 			$resultats->closeCursor();
 
 			$boisson = [];
-			$query="SELECT * FROM boisson";
+			$query="SELECT * FROM boisson ORDER BY qte DESC";
 			$resultats=$bdd->query($query);
 			$resultats->setFetchMode(PDO::FETCH_OBJ);
 			while($resultat = $resultats->fetch()){

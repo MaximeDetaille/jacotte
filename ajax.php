@@ -7,12 +7,12 @@ if(!isset($_GET['method'])){
 if($_GET['method']=="createMenu"){
     $res = json_decode(stripslashes($_POST["data"]), true);
     $_POST = $res;
-	$bdd = new PDO('mysql:host=localhost;dbname=jacotte;charset=utf8', 'root', '');
-    if(!isset($_POST["idPlat"])){ $_POST["idPlat"] = -1;}
-    if(!isset($_POST["idEntree"])){ $_POST["idEntree"] = -1;}
-    if(!isset($_POST["idDessert"])){ $_POST["idDessert"] = -1;}
-    if(!isset($_POST["idFromage"])){ $_POST["idFromage"] = -1;}
-    if(!isset($_POST["idBoisson"])){ $_POST["idBoisson"] = -1;}
+	$bdd = new PDO('mysql:host=localhost;dbname=jacotte;charset=utf8', 'root', 'root');
+    if(!isset($_POST["idPlat"])){ $_POST["idPlat"] = 0;}
+    if(!isset($_POST["idEntree"])){ $_POST["idEntree"] = 0;}
+    if(!isset($_POST["idDessert"])){ $_POST["idDessert"] = 0;}
+    if(!isset($_POST["idFromage"])){ $_POST["idFromage"] = 0;}
+    if(!isset($_POST["idBoisson"])){ $_POST["idBoisson"] = 0;}
     $query="INSERT INTO menu values (
     DEFAULT,
     '".$_POST["nom"]."',

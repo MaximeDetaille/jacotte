@@ -1,7 +1,6 @@
 <?php 
 include('fonctions.php');
 session_start();
-var_dump($_SESSION);
 $array = $_SESSION['cart'];
 $json = __json_encode($array);
 ?>
@@ -9,6 +8,7 @@ $json = __json_encode($array);
 <html>
 <head>
 	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>La cuisine de Jacotte</title>
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="css/owl.theme.default.css">
@@ -43,7 +43,40 @@ $json = __json_encode($array);
 						    <input type="radio" id="wasquehal" value="wasquehal" name="ville" value="wasquehal" />
 						    <label for="wasquehal">Wasquehal</label>
 						</li>
+						<li>
+						    <input type="radio" id="marcq" value="marcq" name="ville" value="marcq" />
+						    <label for="marcq">Marcq</label>
+						</li>
+						<!-- <li>
+						    <input type="radio" id="roncq" value="roncq" name="ville" value="roncq" />
+						    <label for="roncq">Roncq</label>
+						</li> -->
+						<!-- <li>
+						    <input type="radio" id="croix" value="croix" name="ville" value="croix" />
+						    <label for="croix">Croix</label>
+						</li> -->
+						<li>
+						    <input type="radio" id="wambrechies" value="wambrechies" name="ville" value="wambrechies" />
+						    <label for="wambrechies">Wambrechies</label>
+						</li>
+						<!-- <li class="tooLong">
+						    <input type="radio" id="villeneuveAscq" value="villeneuveAscq" name="ville" value="villeneuveAscq" />
+						    <label for="villeneuveAscq">Villeneuve d'Ascq</label>
+						</li> -->
+						<li class="tooLong">
+						    <input type="radio" id="marquette-lez-lille" value="marquette-lez-lille" name="ville" value="marquette-lez-lille" />
+						    <label for="marquette-lez-lille">Marquette-lez-lille</label>
+						</li>
+						<li>
+						    <input type="radio" id="Lille" value="Lille" name="ville" value="Lille" />
+						    <label for="Lille">Lille</label>
+						</li>
+						<!-- <li>
+						    <input type="radio" id="laMadeleine" value="laMadeleine" name="ville" value="laMadeleine" />
+						    <label for="laMadeleine">la Madeleine</label>
+						</li> -->
 					</ul>
+					<br/><br/><br/>
 					<p class="titleInput">Adresse<span class="rouge">*</span></p>
 					<input class="inputAdresse" type="text" name="adresse" placeholder="Exemple : 1 rue Charles de Gaulle">
 					<p class="erreurAdresse"></p>
@@ -76,8 +109,8 @@ $json = __json_encode($array);
 			</div>
 			<div class="col-lg-offset-1 col-lg-3">
 				<h1 class="titleCheckout">Votre commande</h1>
-				<p>Total : {{prixTotal}}</p>
-				<p>Livraison : Gratuite</p>
+				<p>Total : {{prixTotal}}€</p>
+				<p>Livraison : <b v-if="cart.length>3">Gratuite</b><b v-else>3.00€</b></p>
 				<div id="finDeCommande" >
 					<div v-if="prixTotal > 0" class="divButtonCart">
 						<a class="buttonMenu">Valider ma commande</a>
@@ -94,6 +127,7 @@ $json = __json_encode($array);
 		</div>
 	</div>
 
+	<?php include('footer.php'); ?>
 	<script type="text/javascript" src="js/jquery-3.2.0.min.js"></script>
 	<script type="text/javascript" src="js/bootstrap.js"></script>
 	<script src="https://cdn.jsdelivr.net/vue.resource/1.2.1/vue-resource.min.js"></script>

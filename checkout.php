@@ -9,11 +9,13 @@ $json = __json_encode($array);
 <html>
 <head>
 	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>La cuisine de Jacotte</title>
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="css/owl.theme.default.css">
 	<link rel="stylesheet" type="text/css" href="css/owl.carousel.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
+
 </head>
 <body>
 	<?php include('navbar.php'); ?>
@@ -26,19 +28,17 @@ $json = __json_encode($array);
 				<div v-for="item in cart" class="row">
 					<div>
 						<div class="col-lg-2 col-md-1 col-sm-1 col-xs-2">
-							<img class="imgCart" :src="'img/menu/'+item.image"/>
+							<img class="imgCart" :src="'img/produit/'+item.image"/>
 						</div>
-						<div class="col-lg-4 col-md-2 col-sm-3 col-xs-5">
+						<div class="col-lg-4 col-md-2 col-sm-3 col-xs-5 mobileCenter">
 							<p class="titreMenu">{{item.nom}}</p>
 							<p class="prixMenu">{{item.prix}}€</p>
 						</div>
 						<div class="col-lg-4 col-md-2 col-sm-2 col-xs-3">
 							<div class="cartQte">
-								<img @click="decrementQteCheckout(item.id)" class="chevron" src="img/chevronGauche.svg">
 								<div class="qteInput">
 									{{item.qte}}
 								</div>
-								<img v-if="item.qte < item.qteStock" @click="incrementQte(item.id)" class="chevron" src="img/chevronDroit.svg">
 							</div>
 						</div>
 						<div class="col-lg-2 col-md-1 col-sm-1 col-xs-2">
@@ -52,8 +52,8 @@ $json = __json_encode($array);
 			</div>
 			<div class="col-lg-3">
 				<h1 class="titleCheckout">Votre commande</h1>
-				<p>Total : {{prixTotal}}</p>
-				<p>Livraison : Gratuite</p>
+				<p>Total : {{prixTotal}}€</p>
+				<p>Livraison : <b v-if="cart.length>3">Gratuite</b><b v-else>3.00€</b></p>
 				<div @click="checkout('checkout2.php')" v-if="prixTotal > 0" class="divButtonCart">
 					<a class="buttonMenu">Valider ma commande</a>
 				</div>
@@ -78,6 +78,10 @@ $json = __json_encode($array);
 		setTimeout(function(){
 			vm.calcPrixTotal();
 		},100);
+
+		$('navbar-toggle collapsed').click(function(){
+			$('.menu').css('margin-top','185px');
+		})
 	</script>
 </body>
 
