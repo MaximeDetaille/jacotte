@@ -110,7 +110,7 @@ $json = __json_encode($array);
 			<div class="col-lg-offset-1 col-lg-3">
 				<h1 class="titleCheckout">Votre commande</h1>
 				<p>Total : {{prixTotal}}€</p>
-				<p>Livraison : <b v-if="cart.length>3">Gratuite</b><b v-else>3.00€</b></p>
+				<p>Livraison : <b>Gratuite</b></p>
 				<div id="finDeCommande" >
 					<div v-if="prixTotal > 0" class="divButtonCart">
 						<a class="buttonMenu">Valider ma commande</a>

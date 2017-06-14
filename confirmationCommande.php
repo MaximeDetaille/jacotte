@@ -73,11 +73,12 @@ try
   	}
   	
   	$date = "";
-  	$date_actu = date('Hi');
-	$date_fin= 1005;
-	$date_debut= 0000;
+
+	$date_actu = date('G');
+	$date_fin= 10; // 18
+	$date_debut= 0; // 9
 	 
-	if($date_debut <= $date_actu and $date_actu <= $date_fin)
+	if($date_debut <= $date_actu and $date_actu<= $date_fin)
 	{
 		if(date("N")=="6"){
 			$date = new DateTime('+1 day');
@@ -188,6 +189,45 @@ try
 			$bdd->query($query);
 		}
     }
+    
+    $mail = '<html>
+	<body style="background: #f2f2f2;-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;">
+		<div style="max-width: 560px;padding: 20px;background: #ffffff;border-radius: 5px;margin:40px auto;font-family: Open Sans,Helvetica,Arial;font-size: 15px;color: #666;"><div style="max-width: 560px;padding: 20px;background: #ffffff;border-radius: 5px;margin:40px auto;font-family: Open Sans,Helvetica,Arial;font-size: 15px;color: #666;">
+				<div style="color: #444444;font-weight: normal;">
+						<div style="text-align: center;font-weight:600;font-size:26px;padding: 10px 0;border-bottom: solid 3px #eeeeee;"><a href="https://lacuisinedejacotte.fr/"><img src="https://www.lacuisinedejacotte.fr/img/logo.jpg"></a></div>
+						
+						<div style="clear:both"></div>
+				</div>
+				
+				<div style="padding: 0 30px 30px 30px;border-bottom: 3px solid #eeeeee;">
+						<div style="padding:20px 0;font-size: 24px;text-align: center;line-height: 40px;">Merci de votre confiance<span style="display:block;">Votre commande est prise en compte</span></div>
+						<div style="font-size: 16px;text-align: center;line-height: 40px;">Livraison :<span style="display:block;">'.$_POST["adresse"].', '.$_POST["ville"].'</span></div>';
+					for($i = 0;$i<sizeof($_SESSION["cart"]);$i++){
+						$mail.='<div style="padding-bottom:10px;font-size:14px;text-align:left; height:40px; display:block;"><img src=https://www.lacuisinedejacotte.fr/img/produit/'.$_SESSION["cart"][$i]["image"].' width="30" height="30" style="vertical-align:middle;margin-right:10px"> <span style="line-height:40px">'.$_SESSION["cart"][$i]["nom"].'</span></div>';
+					}
+						
+					$mail.='
+					</div>
+					
+					<div style="color: #999;padding: 20px 30px">
+							<div style="">Merci !</div>
+							
+					</div>
+			</div>
+			</body>
+</html>';
+$headers = 'From: La cuisine de Jacotte <lacuisinedejacotte@outlook.fr>' . "\r\n";	
+$headers .= "X-Mailer: PHP ".phpversion()."\n";
+$headers .= "X-Priority: 1 \n";
+$headers .= "Mime-Version: 1.0\n";
+$headers .= "Content-Transfer-Encoding: 8bit\n";
+$headers .= "Content-type: text/html; charset= utf-8\n";
+$headers .= "Date:" . date("D, d M Y h:s:i") . " +0200\n";	
+$to      = $_POST["mail"];
+$subject = 'Confirmation de votre commande - La cuisine de Jacotte';
+$message = $mail;
+
+mail($to, $subject, $message, $headers);
 }
   catch (Exception $e)
   {
@@ -216,7 +256,7 @@ try
 				<a id="hiddenCart" style="display:none"><?php echo $json ?></a>
 				</div>
 				<p class="textEnd">Je prépare dès à présent votre commande, un e-mail de confirmation vient d'être envoyé à l'adresse : <b><?php echo $_POST["mail"]; ?></b></p>
-				<p class="textEnd">Livraison prévue le <b><?php echo $date; ?></b> entre <b>12h00 et 13h20</b> à <?php echo $_POST["adresse"]; ?> pour 
+				<p class="textEnd">Livraison prévue le <b><?php echo $date; ?></b> entre <b>11h et 12h30</b> à <?php echo $_POST["adresse"]; ?> pour 
 				<?php if($_POST["prenom"]==""){
 					echo $_POST["nom"];
 					} else {

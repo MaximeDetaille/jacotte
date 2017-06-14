@@ -5,12 +5,12 @@
 				<img src="img/logo.jpg">
 			</div>
 			<div class="col-lg-3">
-				<p>Nos produits</p>
+				<p><a style="color:black" href="index.php#menu">Nos produits</a></p>
 				<p>A propos de Jacotte</p>
 			</div>
 			<div class="col-lg-3">
 				<p>Livraison</p>
-				<p>Paiment</p>
+				<p>Paiement</p>
 			</div>
 			<div class="col-lg-3">
 				<p>Blog</p>

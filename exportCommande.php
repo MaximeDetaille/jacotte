@@ -4,8 +4,7 @@ $bdd = new PDO('mysql:host=localhost;dbname=jacotte;charset=utf8', 'root', 'root
 $mail = "";
 $commande = [];
 $menu=[];
-// $query="SELECT * FROM commande WHERE dateLivraison='".date('d/m/Y')."'";
-$query="SELECT * FROM commande WHERE dateLivraison='05/05/2017'";
+$query="SELECT * FROM commande WHERE dateLivraison='".date('d/m/Y')."'";
 $resultats=$bdd->query($query);
 $resultats->setFetchMode(PDO::FETCH_OBJ);
 while($resultat = $resultats->fetch()){
@@ -22,16 +21,19 @@ for($i=0;$i<sizeof($commande);$i++){
 		b.id = m.idBoisson AND
 		c.id = cm.idCommande AND
 		cm.idMenu = m.id AND
-		c.dateLivraison = '05/05/2017' AND
+		c.dateLivraison = '".date('d/m/Y')."'AND
 		c.id =".$commande[$i]->id);
+	var_dump($query);
 	$query->execute();
 	$menu[$i] = $query->fetchAll();
 }
 
+var_dump($commande);
+
 $variable = "";
 
 for($i=0;$i<sizeof($commande);$i++){
-	$variable=$variable.'<div style="font-size: 16px;text-align:left;margin-top:20px;"><strong>Commande n°'.$i.'</strong><span style="display:block;">Pour '.$commande[$i]->nom.'</span><span style="display:block;">Adresse : '.$commande[$i]->adresse.', '.$commande[$i]->ville.'</span><span style="display:block;">Tel : '.$commande[$i]->tel.'</span></div>';
+	$variable=$variable.'<div style="font-size: 16px;text-align:left;margin-top:20px;"><strong>Commande n°'.$i.'</strong><span style="display:block;">Pour '.$commande[$i]->nom.'</span><span style="display:block;">Adresse : '.$commande[$i]->adresse.', '.$commande[$i]->ville.'</span><span style="display:block;">Tel : '.$commande[$i]->tel.'</span><span style="display:block;">Total : '.$commande[$i]->prixTotal.'€</span></div>';
 	for($y=0;$y<sizeof($menu[$i][$y]);$y++){
 		$variable=$variable.'
 			<div style="font-size:14px;text-align:left; display:block; margin-top:10px;margin-bottom:10px;font-size:16px;text-decoration:underline;"><span>Menu : '.$menu[$i][$y][0].'</span></div>
@@ -72,13 +74,17 @@ $mail = '<html>
 
 echo $mail;
 
-$to      = 'maxime.detaille@gmail.com';
+$headers = 'From: website' . "\r\n";	
+$headers .= "X-Mailer: PHP ".phpversion()."\n";
+$headers .= "X-Priority: 1 \n";
+$headers .= "Mime-Version: 1.0\n";
+$headers .= "Content-Transfer-Encoding: 8bit\n";
+$headers .= "Content-type: text/html; charset= utf-8\n";
+$headers .= "Date:" . date("D, d M Y h:s:i") . " +0200\n";	
+$to      = 'lacuisinedejacotte@outlook.fr';
 $subject = 'Récapitulation commande du jour';
 $message = $mail;
-$headers = 'From: webmaster@example.com' . "\r\n" .
-    'Reply-To: webmaster@example.com' . "\r\n" .
-    'X-Mailer: PHP/' . phpversion();
 
-mail($to, $subject, $message, $headers);
+//mail($to, $subject, $message, $headers);
 
 ?>

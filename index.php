@@ -127,7 +127,7 @@
 										!
 									</div>
 									<div v-on:click="addToMenuEntree('.$i.',`'.$entree[$i]->id.'`,`'.$entree[$i]->nom.'`,'.$entree[$i]->prix.',`'.$entree[$i]->image.'`,`'.$entree[$i]->qte.'`)"  class="hitbox" data-id="'.$entree[$i]->id.'" data-type="entree"></div>
-									<div class="showInCart"><span class="tick">✓</span></div>
+									<div id="entree-'.$entree[$i]->id.'" class="showInCart"><span class="tick">✓</span></div>
 									<img class="imgCarousel img-responsive" src="img/produit/'.$entree[$i]->image.'">
 									<div class="description">
 										<p class="type text-left">'.$entree[$i]->type.'</p>
@@ -180,7 +180,7 @@
 										!
 									</div>
 									<div v-on:click="addToMenuPlat('.$i.',`'.$plat[$i]->id.'`,`'.$plat[$i]->nom.'`,'.$plat[$i]->prix.',`'.$plat[$i]->image.'`,`'.$plat[$i]->qte.'`)"  class="hitbox" data-type="plat"></div>
-									<div class="showInCart"><span class="tick">✓</span></div>
+									<div id="plat-'.$plat[$i]->id.'" class="showInCart"><span class="tick">✓</span></div>
 									<img class="imgCarousel img-responsive" src="img/produit/'.$plat[$i]->image.'">
 									<div class="description">
 										<p class="type text-left">'.$plat[$i]->type.'</p>
@@ -235,7 +235,7 @@
 									<div class="showDesc">
 										!
 									</div>
-									<div class="showInCart"><span class="tick">✓</span></div>
+									<div id="dessert-'.$dessert[$i]->id.'" class="showInCart"><span class="tick">✓</span></div>
 									<div v-on:click="addToMenuDessert('.$i.',`'.$dessert[$i]->id.'`,`'.$dessert[$i]->nom.'`,'.$dessert[$i]->prix.',`'.$dessert[$i]->image.'`,`'.$dessert[$i]->qte.'`)"  class="hitbox" data-type="dessert"></div>
 									<img class="imgCarousel img-responsive" src="img/produit/'.$dessert[$i]->image.'">
 									<div class="description">
@@ -291,7 +291,7 @@
 									<div class="showDesc">
 										!
 									</div>
-									<div class="showInCart"><span class="tick">✓</span></div>
+									<div id="fromage-'.$fromage[$i]->id.'" class="showInCart"><span class="tick">✓</span></div>
 									<div v-on:click="addToMenuFromage('.$i.',`'.$fromage[$i]->id.'`,`'.$fromage[$i]->nom.'`,'.$fromage[$i]->prix.',`'.$fromage[$i]->image.'`,`'.$fromage[$i]->qte.'`)"  class="hitbox" data-type="fromage"></div>
 									<img class="imgCarousel img-responsive" src="img/produit/'.$fromage[$i]->image.'">
 									<div class="description">
@@ -347,7 +347,7 @@
 									<div class="showDesc">
 										!
 									</div>
-									<div class="showInCart"><span class="tick">✓</span></div>
+									<div id="boisson-'.$boisson[$i]->id.'" class="showInCart"><span class="tick">✓</span></div>
 									<div v-on:click="addToMenuBoisson('.$i.',`'.$boisson[$i]->id.'`,`'.$boisson[$i]->nom.'`,'.$boisson[$i]->prix.',`'.$boisson[$i]->image.'`,`'.$boisson[$i]->qte.'`)"  class="hitbox" data-type="boissons"></div>
 									<img class="imgCarousel img-responsive" src="img/produit/'.$boisson[$i]->image.'">
 									<div class="description">
@@ -398,7 +398,7 @@
 				</div>
 				<a href="#nomMenu">
 					<div class="divButtonAddMenu">
-						<p class="buttonMenu">Continuer</p>
+						<p class="buttonMenu">J'ai terminé !</p>
 					</div>
 				</a>
 				<br/>
@@ -433,8 +433,11 @@
 							<p >{{prixTotal}}€</p>
 						</div>
 						<div class="col-lg-2 col-md-2 col-sm-2 col-xs-6">
-							<div class="divButtonCart">
-								<a @click="checkout('checkout.php')" class="buttonMenu">Commander</a>
+							<div v-if="prixTotal>30.00" @click="checkout('checkout.php')" class="divButtonCart">
+								<a class="buttonMenu">Commander</a>
+							</div>
+							<div v-else>
+								<a style="color:red;" class="buttonMenu">Il vous faut un minimum de 30€ pour commander</a>
 							</div>
 						</div>
 						<div class="col-lg-1 col-md-1 col-sm-1 col-xs-2 hideMobile">
@@ -448,7 +451,7 @@
 						</div>
 						<div v-else>
 							<div class="col-lg-1 col-md-1 col-sm-1 col-xs-2">
-								<img class="imgCart" :src="'img/menu/'+item.image"/>
+								<img class="imgCart" :src="'img/produit/'+item.image"/>
 							</div>
 							<div class="col-lg-2 col-md-2 col-sm-3 col-xs-5">
 								<p class="titreMenu">{{item.nom}}</p>
@@ -474,13 +477,21 @@
 	</div>
 
 
-	<div class="sliderQualite">
+	<div id="qualite" class="sliderQualite">
 		<div class="imgSlider">
 			<div class="container">
 				<div class="row" style="height:100%;">
-					<div class="text-center col-lg-offset-6 col-lg-6 textSlider">
-						<h2>Des produits de qualités</h2>
-						<p>Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un peintre anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte. Il n'a pas fait que survivre cinq siècles, mais s'est aussi adapté à la bureautique informatique, sans que son contenu n'en soit modifié. Il a été popularisé dans les années 1960 grâce à la vente de feuilles Letraset contenant des passages du Lorem Ipsum, et, plus récemment, par son inclusion dans des applications de mise en page de texte, comme Aldus PageMaker</p>
+					<div class="text-left col-lg-offset-6 col-lg-6 textSlider">
+						<h2>Des produits de qualité</h2>
+						<p>Manger sainement au bureau c'est possible !<br><br>
+De délicieuses recettes , des produits frais afin de satisfaire votre palais . Parce que manger une Cuisine équilibrée est bon pour la santé .<br><br>
+C'est ce que la Cuisine de Jacotte vous propose :<br>
+Des recettes saines et gourmandes avec un changement de menu toutes les semaines pour ne pas vous lasser . 
+En partenariat avec les agriculteurs de la région , nous travaillons les produits de saison issus de l'agriculture biologique dès que cela est possible afin de préserver votre santé et notre environnement.<br><br>
+
+Nous vous livrons au bureau du lundi au vendredi ( livraison gratuite à partir de 4 commandes )<br><br>
+
+À très bientôt mes gourmands !!</p>
 					</div>
 				</div>
 			</div>
@@ -578,71 +589,7 @@
 		  	}
 	    })
 
-		  	var clicked=false;
-
-		  	var lastEntree = "";
-		  	var lastPlat = "";
-		  	var lastDessert = "";
-		  	var lastFromage = "";
-		  	var lastBoisson = "";
-
-		  	var lastEntreeId = "";
-
-		  	$('.hitbox').click(function(){
-		  		if($(this).data('type')=='entree'){
-		  			console.log(lastEntreeId);
-		  			if(lastEntree != ""){
-		  				$(lastEntree).parent().children('.showInCart').css('background-color','#000000');
-		  				$(lastEntree).parent().children('.showInCart').children('.tick').hide();
-		  			}
-		  			if(lastEntreeId != $(this).data('id')){
-						$(this).parent().children('.showInCart').css('background-color','#64D581');
-		  				$(this).parent().children('.showInCart').children('.tick').show();
-		  			}
-  					lastEntreeId = $(this).data('id');
-		  			lastEntree = $(this);
-		  		}
-		  		if($(this).data('type')=='plat'){
-		  			if(lastPlat != ""){
-		  				$(lastPlat).parent().children('.showInCart').css('background-color','#000000');
-		  				$(lastPlat).parent().children('.showInCart').children('.tick').hide();
-		  			}
-	  				platClick = true;
-	  				$(this).parent().children('.showInCart').css('background-color','#64D581');
-	  				$(this).parent().children('.showInCart').children('.tick').show();
-		  			lastPlat = $(this);
-		  		}
-		  		if($(this).data('type')=='dessert'){
-		  			if(lastDessert != ""){
-		  				$(lastDessert).parent().children('.showInCart').css('background-color','#000000');
-		  				$(lastDessert).parent().children('.showInCart').children('.tick').hide();
-		  			}
-	  				dessertClick = true;
-	  				$(this).parent().children('.showInCart').css('background-color','#64D581');
-	  				$(this).parent().children('.showInCart').children('.tick').show();
-		  			lastDessert = $(this);
-		  		}
-		  		if($(this).data('type')=='fromage'){
-		  			if(lastFromage != ""){
-		  				$(lastFromage).parent().children('.showInCart').css('background-color','#000000');
-		  				$(lastFromage).parent().children('.showInCart').children('.tick').hide();
-		  			}
-	  				fromageClick = true;
-	  				$(this).parent().children('.showInCart').css('background-color','#64D581');
-	  				$(this).parent().children('.showInCart').children('.tick').show();
-		  			lastFromage = $(this);
-		  		}
-		  		if($(this).data('type')=='boissons'){
-		  			if(lastBoisson != ""){
-		  				$(lastBoisson).parent().children('.showInCart').css('background-color','#000000');
-		  				$(lastBoisson).parent().children('.showInCart').children('.tick').hide();
-		  			}
-	  				boissonsClick = true;
-	  				$(this).parent().children('.showInCart').css('background-color','#64D581');
-	  				$(this).parent().children('.showInCart').children('.tick').show();
-		  			lastBoisson = $(this);
-		  		}
-		  	});	
+		  	
 
 		  	$('.showDesc').click(function(){
 		  		if(!clicked){

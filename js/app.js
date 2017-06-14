@@ -25,6 +25,11 @@ let vm = new Vue({
 		prixBoisson : 0,
 		imageMenu : [{'entree':"0",'plat':"0",'dessert':"0",'fromage':"0",'boisson':"0"}],
 		imageMenuEnd : "",
+		lastIdEntree : "",
+		lastIdPlat : "",
+		lastIdDessert : "",
+		lastIdFromage : "",
+		lastIdBoisson : "",
 	},
 	mounted: function(){
 		now = new Date();
@@ -46,33 +51,103 @@ let vm = new Vue({
 	},
 	methods: {
 		addToMenuEntree: function(id,idMenu,nom,prix,image,qte){
-			this.imageMenu.entree = image;
-			this.prixEntree = prix;
-			this.tmpEntree = {'id':id,'idMenu':idMenu,'nom':nom,'prix':prix,'image':image,'qte':qte}
+			if(this.tmpEntree.id == id){
+				$('#entree-'+idMenu).css('background-color','#000000');
+				$('#entree-'+idMenu).children('.tick').hide();
+				this.imageMenu.entree = "";
+				this.prixEntree = 0;
+				this.tmpEntree = "";
+				this.lastIdEntree = "";
+			}else{
+				$('#entree-'+this.lastIdEntree).css('background-color','#000000');
+				$('#entree-'+this.lastIdEntree).children('.tick').hide();
+				$('#entree-'+idMenu).css('background-color','#64D581');
+				$('#entree-'+idMenu).children('.tick').show();
+				this.imageMenu.entree = image;
+				this.prixEntree = prix;
+				this.tmpEntree = {'id':id,'idMenu':idMenu,'nom':nom,'prix':prix,'image':image,'qte':qte}
+				this.lastIdEntree = idMenu;
+			}
 			this.calcPrixMenu();
 		},
 		addToMenuPlat: function(id,idMenu,nom,prix,image,qte){
-			this.imageMenu.plat = image;
-			this.prixPlat = prix;
-			this.tmpPlat = {'id':id,'idMenu':idMenu,'nom':nom,'prix':prix,'image':image,'qte':qte}
+			if(this.tmpPlat.id == id){
+				$('#plat-'+idMenu).css('background-color','#000000');
+				$('#plat-'+idMenu).children('.tick').hide();
+				this.imageMenu.plat = "";
+				this.prixPlat = 0;
+				this.tmpPlat = "";
+				this.lastIdPlat = "";
+			}else{
+				$('#plat-'+this.lastIdPlat).css('background-color','#000000');
+				$('#plat-'+this.lastIdPlat).children('.tick').hide();
+				$('#plat-'+idMenu).css('background-color','#64D581');
+				$('#plat-'+idMenu).children('.tick').show();
+				this.imageMenu.plat = image;
+				this.prixPlat = prix;
+				this.tmpPlat = {'id':id,'idMenu':idMenu,'nom':nom,'prix':prix,'image':image,'qte':qte}
+				this.lastIdPlat = idMenu;
+			}
 			this.calcPrixMenu();
 		},
 		addToMenuDessert: function(id,idMenu,nom,prix,image,qte){
-			this.imageMenu.dessert = image;
-			this.prixDessert = prix;
-			this.tmpDessert = {'id':id,'idMenu':idMenu,'nom':nom,'prix':prix,'image':image,'qte':qte}
+			if(this.tmpDessert.id == id){
+				$('#dessert-'+idMenu).css('background-color','#000000');
+				$('#dessert-'+idMenu).children('.tick').hide();
+				this.imageMenu.dessert = "";
+				this.prixDessert = 0;
+				this.tmpDessert = "";
+				this.lastIdDessert = "";
+			}else{
+				$('#dessert-'+this.lastIdDessert).css('background-color','#000000');
+				$('#dessert-'+this.lastIdDessert).children('.tick').hide();
+				$('#dessert-'+idMenu).css('background-color','#64D581');
+				$('#dessert-'+idMenu).children('.tick').show();
+				this.imageMenu.dessert = image;
+				this.prixDessert = prix;
+				this.tmpDessert = {'id':id,'idMenu':idMenu,'nom':nom,'prix':prix,'image':image,'qte':qte}
+				this.lastIdDessert = idMenu;
+			}
 			this.calcPrixMenu();
 		},
 		addToMenuFromage: function(id,idMenu,nom,prix,image,qte){
-			this.imageMenu.fromage = image;
-			this.prixFromage = prix;
-			this.tmpFromage = {'id':id,'idMenu':idMenu,'nom':nom,'prix':prix,'image':image,'qte':qte}
+			if(this.tmpFromage.id == id){
+				$('#fromage-'+idMenu).css('background-color','#000000');
+				$('#fromage-'+idMenu).children('.tick').hide();
+				this.imageMenu.fromage = "";
+				this.prixFromage = 0;
+				this.tmpFromage = "";
+				this.lastIdFromage = "";
+			}else{
+				$('#fromage-'+this.lastIdFromage).css('background-color','#000000');
+				$('#fromage-'+this.lastIdFromage).children('.tick').hide();
+				$('#fromage-'+idMenu).css('background-color','#64D581');
+				$('#fromage-'+idMenu).children('.tick').show();
+				this.imageMenu.fromage = image;
+				this.prixFromage = prix;
+				this.tmpFromage = {'id':id,'idMenu':idMenu,'nom':nom,'prix':prix,'image':image,'qte':qte}
+				this.lastIdFromage = idMenu;
+			}
 			this.calcPrixMenu();
 		},
 		addToMenuBoisson: function(id,idMenu,nom,prix,image,qte){
-			this.imageMenu.boisson = image;
-			this.prixBoisson = prix;
-			this.tmpBoisson = {'id':id,'idMenu':idMenu,'nom':nom,'prix':prix,'image':image,'qte':qte}
+			if(this.tmpBoisson.id == id){
+				$('#boisson-'+idMenu).css('background-color','#000000');
+				$('#boisson-'+idMenu).children('.tick').hide();
+				this.imageMenu.boisson = "";
+				this.prixBoisson = 0;
+				this.tmpBoisson = "";
+				this.lastIdBoisson = "";
+			}else{
+				$('#boisson-'+this.lastIdBoisson).css('background-color','#000000');
+				$('#boisson-'+this.lastIdBoisson).children('.tick').hide();
+				$('#boisson-'+idMenu).css('background-color','#64D581');
+				$('#boisson-'+idMenu).children('.tick').show();
+				this.imageMenu.boisson = image;
+				this.prixBoisson = prix;
+				this.tmpBoisson = {'id':id,'idMenu':idMenu,'nom':nom,'prix':prix,'image':image,'qte':qte}
+				this.lastIdBoisson = idMenu;
+			}
 			this.calcPrixMenu();
 		},
 		addToCart: function(id,idMenu,nom,prix,image,qte,idEntree,idPlat,idDessert,idFromage,idBoisson){
@@ -237,6 +312,7 @@ let vm = new Vue({
 			}
 			menu = {'nom':this.nomMenu,'prix':this.prixMenu,'type':"personnalisé",'image':this.imageMenuEnd,'idEntree':this.tmpEntree.idMenu,'idPlat':this.tmpPlat.idMenu,'idDessert':this.tmpDessert.idMenu,'idFromage':this.tmpFromage.idMenu,'idBoisson':this.tmpBoisson.idMenu,'perso':1}
 			var dataString = JSON.stringify(menu);
+			console.log(dataString);
 			result = "";
 			$.post("ajax.php?method=createMenu",{data : dataString},function(data, status){
 		        result = data;

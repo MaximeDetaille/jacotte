@@ -37,5 +37,31 @@ if($_GET['method']=="createMenu"){
     echo $id[0];
 }
 
+if($_GET['method']=="supprMenu"){
+    $bdd = new PDO('mysql:host=localhost;dbname=jacotte;charset=utf8', 'root', 'root');
+    $query = "DELETE FROM ".$_GET["type"]."
+              WHERE id = ".$_GET["id"].";";
+    $bdd->query($query);
+
+    echo $query;
+}
+
+if($_GET['method']=="modifMenu"){
+    $bdd = new PDO('mysql:host=localhost;dbname=jacotte;charset=utf8', 'root', 'root');
+    $query = "UPDATE ".$_GET["typeProduit"].
+             " SET nom = '".$_GET["nom"].
+             "', type = '".$_GET["type"].
+             "', description = '".$_GET["description"].
+             "', prix = ".$_GET["prix"].
+             ", qte = ".$_GET["quantite"].
+             ", allergenes = '".$_GET["allergenes"].
+             "' WHERE id = ".$_GET["id"].";";
+    $bdd->query($query);
+
+}
+
+if($_GET['method']=="contact"){
+    $bdd = new PDO('mysql:host=localhost;dbname=jacotte;charset=utf8', 'root', 'root');
+}
 
 ?>
